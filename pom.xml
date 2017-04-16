@@ -213,8 +213,37 @@
 				<configuration>
 					<port>80</port>
 					<path>/${project.artifactId}</path>
+					<!--
                     <warSourceDirectory>${basedir}/target/${artifactId}</warSourceDirectory>
+                    -->
 				</configuration>
+			</plugin>
+
+			<!--docker部署插件-->
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.12</version>
+				<configuration>
+					<imageName>172.26.179.88:5000/${project.name}</imageName>
+					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+					<skipDockerBuild>false</skipDockerBuild>
+					<resources>
+						<resource>
+							<directory>${project.build.directory}</directory>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!--
+				<configuration>
+					<fork>true</fork>
+				</configuration>
+				-->
 			</plugin>
 		</plugins>
 	</build>
