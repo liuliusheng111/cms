@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>报名</title>
+    <meta name="keywords" content="报名"/>
+    <meta name="description" content="报名"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/enter/css/common/base_rem.css"/>
+    <link rel="stylesheet" href="static/enter/css/app/enter.css"/>
+    <script type="text/javascript" src="static/component/ueditor/third-party/jquery-1.10.2.min.js"></script>
+
+    <script>
+        var deviceWidth = document.documentElement.clientWidth;
+        if (deviceWidth > 540) deviceWidth = 540;
+        document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+    </script>
+</head>
+<body>
+<div class="main">
+    <div class="fillinfo">
+        <div class="fillinfo_title">
+            <span>报名处</span>
+        </div>
+        <div class="fillbox">
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="field name">
+                    <p class="fn-clear"><label>参赛者姓名</label>
+                        <input type="text" placeholder="(必填)" name="username"/>
+                    </p>
+                </div>
+                <div class="photo fn-clear">
+                    <div class="photo_l"><label>参赛者作品</label></div>
+                    <div class="photo_r">
+                    <span class="addimg">
+                        <input type="file" id="file" accept="image/*" onchange="uploadFile()" name="file"/>
+                    </span>
+                    </div>
+                </div>
+                <div class="field phone">
+                    <p class="fn-clear"><label>手机号码</label>
+                        <input type="text" placeholder="(选填)" name="phone"/>
+                    </p>
+                </div>
+                <div class="field declaration">
+                    <p class="fn-clear"><label>参赛者地址</label>
+                        <input type="text" placeholder="(选填)" name="declaration"/>
+                    </p>
+                </div>
+                <div class="tojoin">
+                    <input type="button" value="确认报名"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function uploadFile() {
+//        var formdata = new FormData();
+//        var file =$('#file');
+//        formdata.append("file", file);
+//        $.ajax({
+//            type: "post",
+//            url: "enter/upload",
+//            async: true,
+//            data: "files=" + formdata,
+//            dataType: "text",
+//            success: function (data) {
+//                alert(data);
+//            },
+//            error: function () {
+//                alert("登录出错");
+//            }
+//        })
+
+        var data = new FormData();
+//        data.append('a_id', model.a_id);
+//        data.append('name', model.name);
+//        data.append('sort', model.sort);
+        data.append('file', $('#file')[0].files[0]);
+        $.ajax({
+            url: 'enter/upload',
+            type: 'POST',
+            data: data,
+            processData: false,  // 告诉jQuery不要去处理发送的数据
+            contentType: false  // 告诉jQuery不要去设置Content-Type请求头
+        }).done(function(ret){
+            if (ret) {
+                alert(ret);
+            }else{
+                alert('保存成功！');
+                //location = '__URL__';
+            }
+        });
+        return false;
+    }
+</script>
+
+</body>
+</html>
