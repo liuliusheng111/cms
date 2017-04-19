@@ -2,6 +2,11 @@ package com.jflyfox.component.interceptor;
 
 import java.util.List;
 
+import com.jflyfox.modules.admin.site.SessionSite;
+import com.jflyfox.modules.admin.site.SiteConstant;
+import com.jflyfox.modules.admin.site.SiteService;
+import com.jflyfox.modules.admin.site.TbSite;
+import com.jflyfox.system.user.SysUser;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Interceptor;
@@ -10,11 +15,6 @@ import com.jfinal.core.Controller;
 import com.jflyfox.component.util.JFlyFoxUtils;
 import com.jflyfox.jfinal.base.BaseController;
 import com.jflyfox.jfinal.component.util.Attr;
-import com.jflyfox.modules.admin.site.SessionSite;
-import com.jflyfox.modules.admin.site.SiteConstant;
-import com.jflyfox.modules.admin.site.SiteService;
-import com.jflyfox.modules.admin.site.TbSite;
-import com.jflyfox.system.user.SysUser;
 
 /**
  * 站点认证拦截器

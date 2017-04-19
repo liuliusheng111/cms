@@ -1,14 +1,9 @@
 package com.jflyfox.modules.enter;
 
-import com.jfinal.plugin.activerecord.Page;
+import com.alibaba.fastjson.JSONObject;
 import com.jflyfox.component.base.BaseProjectController;
-import com.jflyfox.jfinal.base.Paginator;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
-import com.jflyfox.modules.CommonController;
-import com.jflyfox.modules.admin.article.TbArticle;
-import com.jflyfox.modules.admin.comment.TbComment;
-import com.jflyfox.modules.admin.pageview.TbPageView;
-import com.jflyfox.system.user.SysUser;
+import com.jflyfox.modules.admin.image.model.TbImage;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
@@ -21,10 +16,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ControllerBind(controllerKey = "/enter")
 public class EnterController extends BaseProjectController {
@@ -40,22 +32,22 @@ public class EnterController extends BaseProjectController {
 	private static final String path = "/pages/enter/";
 
 	public void index() {
-		render(path + "enter.html");
+		TbEnter attr = getModel(TbEnter.class);
+		setAttr("model", attr);
+		render(path + "add.html");
 	}
 
-	public void upload() {
-
+	/**
+	 * 上传文件
+	 */
+	public void uploadFile() {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		try {
 			HttpServletRequest request = getRequest();
 			List<FileItem> items = upload.parseRequest(request);
-			System.out.println("1:=========" + items.size());
-			Map param = new HashMap();
 			for (Object object : items) {
-
 				FileItem fileItem = (FileItem) object;
-
 				//上传七牛
 				Zone z = Zone.autoZone();
 				Configuration c = new Configuration(z);
@@ -95,6 +87,35 @@ public class EnterController extends BaseProjectController {
 			renderText("error");
 		}
 	}
+
+	/**
+	 * 投稿
+	 */
+	public void save() {
+
+		JSONObject json = new JSONObject();
+		json.put("status", 2);// 失败
+
+		TbEnter model = getModel(TbEnter.class);
+		model.save();
+
+//		if (!user.getStr("password").equals(JFlyFoxUtils.passwordEncrypt(oldPassword))) {
+//			json.put("msg", "密码错误！");
+//			renderJson(json.toJSONString());
+//			return;
+//		}
+//		if (StrUtils.isNotEmpty(newPassword) && !newPassword.equals(newPassword2)) {
+//			json.put("msg", "两次新密码不一致！");
+//			renderJson(json.toJSONString());
+//			return;
+//		} else if (StrUtils.isNotEmpty(newPassword)) { // 输入密码并且一直
+//			model.set("password", JFlyFoxUtils.passwordEncrypt(newPassword));
+//		}
+
+		json.put("status", 1);// 成功
+		renderJson(json.toJSONString());
+	}
+
 
 	//简单上传，使用默认策略，只需要设置上传的空间名就可以了
 	public String getUpToken() {
