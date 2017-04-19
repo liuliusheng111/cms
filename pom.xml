@@ -135,12 +135,25 @@
 			<artifactId>aliyun-sdk-oss</artifactId>
 			<version>2.0.6</version>
 		</dependency>
-		
+
+		<!--qiniu oss-->
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>[7.2.0, 7.2.99]</version>
+		</dependency>
+
 		<!-- 数据库 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.35</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -211,7 +224,7 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.1</version>
 				<configuration>
-					<port>80</port>
+					<port>9999</port>
 					<path>/${project.artifactId}</path>
 					<!--
                     <warSourceDirectory>${basedir}/target/${artifactId}</warSourceDirectory>
