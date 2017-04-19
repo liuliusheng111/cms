@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.modules.admin.image.model.TbImage;
+import com.jflyfox.utils.IdUtis;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
@@ -17,14 +18,17 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 
 @ControllerBind(controllerKey = "/enter")
 public class EnterController extends BaseProjectController {
 
 	Logger logger =Logger.getLogger(EnterController.class);
 
+
 	//设置好账号的ACCESS_KEY和SECRET_KEY
 	private static final String ACCESS_KEY = "btdWf0hTxxlamaZeKKB3bWslQZzfTqvaJhTjepBe";
+	private static final String QINIU_IMG_URL_PRIFIX = "http://ool6v2nck.bkt.clouddn.com/enter/";
 	private static final String SECRET_KEY = "8tpn4xlgdCYXpit3Qo7PcoASw82jmigzs9qTc6BG";
 	//要上传的空间
 	private static final String BUCKET_NAME = "ybsf-image";
@@ -48,23 +52,24 @@ public class EnterController extends BaseProjectController {
 			List<FileItem> items = upload.parseRequest(request);
 			for (Object object : items) {
 				FileItem fileItem = (FileItem) object;
+
 				//上传七牛
-				Zone z = Zone.autoZone();
-				Configuration c = new Configuration(z);
-				//创建上传对象
-				UploadManager uploadManager = new UploadManager(c);
-				try {
-					String key = "enter/aa"+fileItem.getName();
-					uploadManager.put(fileItem.get(),key,getUpToken());
-					//调用put方法上传
-					Response res = uploadManager.put(fileItem.get(), key, getUpToken());
-					//打印返回的信息
-					System.out.println(res.bodyString());
-				} catch (QiniuException e) {
-					Response r = e.response;
-					//响应的文本信息
-					System.out.println(r.bodyString());
-				}
+//				Zone z = Zone.autoZone();
+//				Configuration c = new Configuration(z);
+//				//创建上传对象
+//				UploadManager uploadManager = new UploadManager(c);
+//				try {
+//					String key = "enter/aa"+fileItem.getName();
+//					uploadManager.put(fileItem.get(),key,getUpToken());
+//					//调用put方法上传
+//					Response res = uploadManager.put(fileItem.get(), key, getUpToken());
+//					//打印返回的信息
+//					System.out.println(res.bodyString());
+//				} catch (QiniuException e) {
+//					Response r = e.response;
+//					//响应的文本信息
+//					System.out.println(r.bodyString());
+//				}
 
 				//上传到本地
 //				if (fileItem.isFormField()) {
@@ -81,7 +86,7 @@ public class EnterController extends BaseProjectController {
 //					fileItem.write(new File(path));
 //				}
 			}
-			renderText("ok");
+			renderText(QINIU_IMG_URL_PRIFIX+IdUtis.getIdByUUId()+".png");
 		}catch (Exception e){
 			logger.error("upload file errer:"+path +e.getMessage());
 			renderText("error");
@@ -123,4 +128,6 @@ public class EnterController extends BaseProjectController {
 		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 		return auth.uploadToken(BUCKET_NAME);
 	}
+
+
 }

@@ -27,9 +27,12 @@ public class QiniuUploadTest {
     //要上传的空间
     private static final String BUCKET_NAME = "ybsf-image";
 
+
     public static void main(String args[]) throws IOException {
+
         new QiniuUploadTest().upload();
     }
+
 
     //简单上传，使用默认策略，只需要设置上传的空间名就可以了
     public String getUpToken() {

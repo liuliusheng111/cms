@@ -36,9 +36,19 @@
                 <div class="photo fn-clear">
                     <div class="photo_l"><label>参赛者作品</label></div>
                     <div class="photo_r">
-                    <span class="addimg">
-                        <input type="file" id="file" accept="image/*" onchange="uploadFile()" name="file"/>
-                    </span>
+                        <span class="addimg">
+                            <input type="file" id="file1"  accept="image/*" onchange="uploadFile(1)" name="file1"/>
+                            <img  id="img1" src="http://ool6v2nck.bkt.clouddn.com/enter/test.png" style="display: none">
+                        </span>
+                        <span class="addimg">
+                            <input type="file"  id="file2" accept="image/*" onchange="uploadFile(2)" name="file2"/>
+                            <img id="img2" src="http://ool6v2nck.bkt.clouddn.com/enter/test.png" style="display:none">
+                        </span>
+                        <span class="addimg">
+                            <input type="file"  id="file3" accept="image/*" onchange="uploadFile(3)" name="file3"/>
+                            <img  id="img3" src="http://ool6v2nck.bkt.clouddn.com/enter/test.png" style="display:none">
+                        </span>
+
                     </div>
                 </div>
                 <div class="field phone">
@@ -68,9 +78,26 @@
     /**
      * 上传图片,文件
      */
-    function uploadFile() {
+    function uploadFile(index) {
+
         var data = new FormData();
-        data.append('file', $('#file')[0].files[0]);
+
+        var file;
+        var img ,fileObj;
+        if(index==1){
+            file == $('#file1')[0].files[0];
+            fileObj = $('#file1');
+            img = $('#img1');
+        }else if (index==2){
+            file == $('#file2')[0].files[0];
+            fileObj = $('#file2');
+            img = $('#img2');
+        }else if(index==3){
+            file == $('#file3')[0].files[0];
+            fileObj = $('#file3');
+            img = $('#img3');
+        }
+        data.append('file', file);
         $.ajax({
             url: 'enter/uploadFile',
             type: 'POST',
@@ -79,7 +106,9 @@
             contentType: false  // 告诉jQuery不要去设置Content-Type请求头
         }).done(function(ret){
             if (ret) {
-                alert(ret);
+                fileObj.hide();
+                img.show();
+                img.src="";
             }else{
                 alert('保存成功！');
             }
@@ -105,9 +134,9 @@
                 } else {
                     alert('保存失败：'+data.msg);
                 }
-                $('[name="old_password"]').val('');
-                $('[name="new_password"]').val('');
-                $('[name="new_password2"]').val('');
+//                $('[name="old_password"]').val('');
+//                $('[name="new_password"]').val('');
+//                $('[name="new_password2"]').val('');
             },
             error:function(html){
                 var flag = (typeof console != 'undefined');
