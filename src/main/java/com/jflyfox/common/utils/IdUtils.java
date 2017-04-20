@@ -1,4 +1,4 @@
-package com.jflyfox.utils;
+package com.jflyfox.common.utils;
 
 import java.util.UUID;
 
@@ -6,7 +6,7 @@ import java.util.UUID;
  * 生成16位数字ID
  * Created by admin on 17/4/19.
  */
-public class IdUtis {
+public class IdUtils {
     public static String getIdByUUId() {
         int machineId = 1;//最大支持1-9个集群机器部署
         int hashCodeV = UUID.randomUUID().toString().hashCode();

@@ -117,11 +117,9 @@
             if (data.status==1) {
                 fileObj.hide();
                 img.attr('src',data.url);
-                alert(data.url);
                 img.show();
                 del.show();
                 imageId.val(data.name);
-                alert(imageId.val());
             }else{
                 alert('保存失败！');
             }
@@ -176,9 +174,6 @@
                 } else {
                     alert('保存失败：'+data.msg);
                 }
-//                $('[name="old_password"]').val('');
-//                $('[name="new_password"]').val('');
-//                $('[name="new_password2"]').val('');
             },
             error:function(html){
                 var flag = (typeof console != 'undefined');
@@ -190,6 +185,5 @@
 </script>
 <script type="text/javascript" src="static/common/valid.js"></script>
 <script type="text/javascript" src="static/component/ueditor/third-party/jquery-1.10.2.min.js"></script>
-
 </body>
 </html>

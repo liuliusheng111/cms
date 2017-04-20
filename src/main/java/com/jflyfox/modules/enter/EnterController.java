@@ -1,10 +1,11 @@
 package com.jflyfox.modules.enter;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jflyfox.common.service.threadpool.ExecutorProcessPool;
+import com.jflyfox.common.utils.*;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.system.file.util.FileUploadUtils;
-import com.jflyfox.utils.IdUtis;
 import com.qiniu.util.Auth;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -22,14 +23,9 @@ public class EnterController extends BaseProjectController {
 	Logger logger =Logger.getLogger(EnterController.class);
 
 
-	//设置好账号的ACCESS_KEY和SECRET_KEY
-	private static final String ACCESS_KEY = "btdWf0hTxxlamaZeKKB3bWslQZzfTqvaJhTjepBe";
-	private static final String QINIU_IMG_URL_PRIFIX = "http://ool6v2nck.bkt.clouddn.com/enter/";
-	private static final String SECRET_KEY = "8tpn4xlgdCYXpit3Qo7PcoASw82jmigzs9qTc6BG";
-	//要上传的空间
-	private static final String BUCKET_NAME = "ybsf-image";
 
 	private static final String path = "/pages/enter/";
+	private static final String IMG_PATH = "/upload/enter/"; //图片上传到服务器的相对路径
 
 	public void index() {
 		TbEnter attr = getModel(TbEnter.class);
@@ -51,39 +47,28 @@ public class EnterController extends BaseProjectController {
 			String picturename = StringUtils.EMPTY;
 			String imageName = StringUtils.EMPTY;
 			for (Object object : items) {
-				FileItem fileItem = (FileItem) object;
+				final FileItem fileItem = (FileItem) object;
 
-				//上传七牛
-//				Zone z = Zone.autoZone();
-//				Configuration c = new Configuration(z);
-//				//创建上传对象
-//				UploadManager uploadManager = new UploadManager(c);
-//				try {
-//					String key = "enter/aa"+fileItem.getName();
-//					uploadManager.put(fileItem.get(),key,getUpToken());
-//					//调用put方法上传
-//					Response res = uploadManager.put(fileItem.get(), key, getUpToken());
-//					//打印返回的信息
-//					System.out.println(res.bodyString());
-//				} catch (QiniuException e) {
-//					Response r = e.response;
-//					//响应的文本信息
-//					System.out.println(r.bodyString());
-//				}
+				//异步上传到七牛
+				ExecutorProcessPool.getInstance().execute(new Runnable() {
+					@Override
+					public void run() {
+						QiniuUtils.upload2Qiniu(fileItem);
+					}
+				});
 
 				//上传到本地
 				picturename =fileItem.getName();
 				if (picturename==null){
 					continue;
 				}
-				imageName = IdUtis.getIdByUUId()+picturename.substring(picturename.lastIndexOf("."));
+				imageName = IdUtils.getIdByUUId()+picturename.substring(picturename.lastIndexOf("."));
 				String webRootPath = FileUploadUtils.getRootPath() ;
-				String storePath = webRootPath + "/upload/enter/";
+				String storePath = webRootPath + IMG_PATH;
 				String path = storePath + imageName;
-				System.out.println("======================="+path+"==========");
 				fileItem.write(new File(path));
 			}
-			result.put("url",request.getContextPath()+"/upload/enter/"+imageName);
+			result.put("url",request.getContextPath()+IMG_PATH+imageName);
 			result.put("name",imageName);
 			result.put("status",1);
 			renderJson(result.toJSONString());
@@ -101,38 +86,22 @@ public class EnterController extends BaseProjectController {
 		JSONObject json = new JSONObject();
 		json.put("status", 2);// 失败
 
+		//保存投稿信息
 		TbEnter model = getModel(TbEnter.class);
 		model.setCreateTime(getNow());
 		model.save();
 
-		String imageId1 =getPara("imageId1");
-		String imageId2 =getPara("imageId2");
-		String imageId3 =getPara("imageId3");
-
-
-//		if (!user.getStr("password").equals(JFlyFoxUtils.passwordEncrypt(oldPassword))) {
-//			json.put("msg", "密码错误！");
-//			renderJson(json.toJSONString());
-//			return;
-//		}
-//		if (StrUtils.isNotEmpty(newPassword) && !newPassword.equals(newPassword2)) {
-//			json.put("msg", "两次新密码不一致！");
-//			renderJson(json.toJSONString());
-//			return;
-//		} else if (StrUtils.isNotEmpty(newPassword)) { // 输入密码并且一直
-//			model.set("password", JFlyFoxUtils.passwordEncrypt(newPassword));
-//		}
+		//保存图片信息
+		TbEnterImg enterImg = getModel(TbEnterImg.class);
+		enterImg.setEnterId(model.getId());
+		enterImg.setImage1Id(getPara("imageId1"));
+		enterImg.setImage2Id(getPara("imageId2"));
+		enterImg.setImage3Id(getPara("imageId3"));
 
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}
 
-	//简单上传，使用默认策略，只需要设置上传的空间名就可以了
-	public String getUpToken() {
-		//密钥配置
-		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
-		return auth.uploadToken(BUCKET_NAME);
-	}
 
 
 }
