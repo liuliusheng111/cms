@@ -38,15 +38,22 @@
                     <div class="photo_r">
                         <span class="addimg">
                             <input type="file" id="file1"  accept="image/*" onchange="uploadFile(1)" name="file1"/>
-                            <img  id="img1" src="http://ool6v2nck.bkt.clouddn.com/enter/test.png" style="display: none">
+                            <input type="hidden" id="imageId1" name="imageId1">
+                            <img  id="img1"  style="display: none">
+                            <img  id="del1" src="static/enter/images/del.png" style="display: none" onclick="removeImg(1)">
                         </span>
                         <span class="addimg">
                             <input type="file"  id="file2" accept="image/*" onchange="uploadFile(2)" name="file2"/>
-                            <img id="img2" src="http://ool6v2nck.bkt.clouddn.com/enter/test.png" style="display:none">
+                            <input type="hidden" id="imageId2" name="imageId2">
+                            <img id="img2"  style="display:none">
+                            <img id="del2" src="static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
+
                         </span>
                         <span class="addimg">
                             <input type="file"  id="file3" accept="image/*" onchange="uploadFile(3)" name="file3"/>
-                            <img  id="img3" src="http://ool6v2nck.bkt.clouddn.com/enter/test.png" style="display:none">
+                            <input type="hidden" id="imageId3" name="imageId3">
+                            <img  id="img3"  style="display:none">
+                            <img  id="del3" src="static/enter/images/del.png" style="display: none" onclick="removeImg(3)">
                         </span>
 
                     </div>
@@ -79,41 +86,75 @@
      * 上传图片,文件
      */
     function uploadFile(index) {
-
         var data = new FormData();
-
-        var file;
-        var img ,fileObj;
+        var img ,fileObj,del,imageId;
         if(index==1){
-            file == $('#file1')[0].files[0];
+            data.append('file', $('#file1')[0].files[0]);
             fileObj = $('#file1');
             img = $('#img1');
+            del = $('#del1');
+            imageId = $('#imageId1');
         }else if (index==2){
-            file == $('#file2')[0].files[0];
+            data.append('file', $('#file2')[0].files[0]);
             fileObj = $('#file2');
             img = $('#img2');
+            del = $('#del2');
+            imageId = $('#imageId2');
         }else if(index==3){
-            file == $('#file3')[0].files[0];
+            data.append('file', $('#file3')[0].files[0]);
             fileObj = $('#file3');
             img = $('#img3');
+            del = $('#del3');
+            imageId = $('#imageId3');
         }
-        data.append('file', file);
         $.ajax({
             url: 'enter/uploadFile',
             type: 'POST',
             data: data,
             processData: false,  // 告诉jQuery不要去处理发送的数据
             contentType: false  // 告诉jQuery不要去设置Content-Type请求头
-        }).done(function(ret){
-            if (ret) {
+        }).done(function(data){
+            if (data.status==1) {
                 fileObj.hide();
+                img.attr('src',data.url);
+                alert(data.url);
                 img.show();
-                img.src="";
+                del.show();
+                imageId.val(data.name);
+                alert(imageId.val());
             }else{
-                alert('保存成功！');
+                alert('保存失败！');
             }
         });
         return false;
+    }
+
+    /**
+     * 移除图片ID值
+     */
+    function removeImg(index) {
+        var img ,fileObj,del,imageId;
+        if(index==1){
+            fileObj = $('#file1');
+            img = $('#img1');
+            del = $('#del1');
+            imageId = $('#imageId1');
+        }else if (index==2){
+            fileObj = $('#file2');
+            img = $('#img2');
+            del = $('#del2');
+            imageId = $('#imageId2');
+        }else if(index==3){
+            fileObj = $('#file3');
+            img = $('#img3');
+            del = $('#del3');
+            imageId = $('#imageId3');
+        }
+        fileObj.show();
+        fileObj.empty();
+        del.hide();
+        img.hide();
+        imageId.val("");
     }
 
     /**

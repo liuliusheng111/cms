@@ -3,22 +3,18 @@ package com.jflyfox.modules.enter;
 import com.alibaba.fastjson.JSONObject;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
-import com.jflyfox.modules.admin.image.model.TbImage;
+import com.jflyfox.system.file.util.FileUploadUtils;
 import com.jflyfox.utils.IdUtis;
-import com.qiniu.common.QiniuException;
-import com.qiniu.common.Zone;
-import com.qiniu.http.Response;
-import com.qiniu.storage.Configuration;
-import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 @ControllerBind(controllerKey = "/enter")
 public class EnterController extends BaseProjectController {
@@ -47,9 +43,13 @@ public class EnterController extends BaseProjectController {
 	public void uploadFile() {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
+		JSONObject result = new JSONObject();
+		result.put("status",2);
 		try {
 			HttpServletRequest request = getRequest();
 			List<FileItem> items = upload.parseRequest(request);
+			String picturename = StringUtils.EMPTY;
+			String imageName = StringUtils.EMPTY;
 			for (Object object : items) {
 				FileItem fileItem = (FileItem) object;
 
@@ -72,24 +72,24 @@ public class EnterController extends BaseProjectController {
 //				}
 
 				//上传到本地
-//				if (fileItem.isFormField()) {
-//					param.put(fileItem.getFieldName(),
-//							fileItem.getString("utf-8"));// 如果你页面编码是utf-8的
-//					System.out.println("4: param.get(fileItem.getFieldName())==="
-//							+ param.get(fileItem.getFieldName()));
-//				} else {
-//
-//					String picturename =fileItem.getName();
-//
-//					String path = "/tmp/" + picturename;
-//					System.out.println("======================="+path+"==========");
-//					fileItem.write(new File(path));
-//				}
+				picturename =fileItem.getName();
+				if (picturename==null){
+					continue;
+				}
+				imageName = IdUtis.getIdByUUId()+picturename.substring(picturename.lastIndexOf("."));
+				String webRootPath = FileUploadUtils.getRootPath() ;
+				String storePath = webRootPath + "/upload/enter/";
+				String path = storePath + imageName;
+				System.out.println("======================="+path+"==========");
+				fileItem.write(new File(path));
 			}
-			renderText(QINIU_IMG_URL_PRIFIX+IdUtis.getIdByUUId()+".png");
+			result.put("url",request.getContextPath()+"/upload/enter/"+imageName);
+			result.put("name",imageName);
+			result.put("status",1);
+			renderJson(result.toJSONString());
 		}catch (Exception e){
 			logger.error("upload file errer:"+path +e.getMessage());
-			renderText("error");
+			renderJson(result);
 		}
 	}
 
@@ -103,6 +103,10 @@ public class EnterController extends BaseProjectController {
 
 		TbEnter model = getModel(TbEnter.class);
 		model.save();
+		String imageId1 =getPara("imageId1");
+		String imageId2 =getPara("imageId2");
+		String imageId3 =getPara("imageId3");
+
 
 //		if (!user.getStr("password").equals(JFlyFoxUtils.passwordEncrypt(oldPassword))) {
 //			json.put("msg", "密码错误！");
