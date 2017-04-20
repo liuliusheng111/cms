@@ -2,8 +2,6 @@ package com.jflyfox.modules.enter;
 
 import com.jflyfox.jfinal.component.annotation.ModelBind;
 import com.jflyfox.component.base.BaseProjectModel;
-import com.jflyfox.modules.admin.article.TbArticle;
-
 
 @ModelBind(table = "tb_enter", key = "id")
 public class TbEnter extends BaseProjectModel<TbEnter> {
@@ -17,6 +15,8 @@ public class TbEnter extends BaseProjectModel<TbEnter> {
 	private String ADDRESS = "address"; //地址
 	private String AGE = "age"; // 年龄
 	private String GENDER = "gender"; // 性别
+	private String CREATE_TIME = "create_time"; // 创建时间
+
 
 
 	public TbEnter setId(java.lang.Integer value) {
@@ -74,5 +74,15 @@ public class TbEnter extends BaseProjectModel<TbEnter> {
 	public java.lang.Integer getGender() {
 		return get(GENDER);
 	}
+
+	public TbEnter setCreateTime(java.lang.String value) {
+		set(CREATE_TIME, value);
+		return this;
+	}
+
+	public java.lang.String getCreateTime() {
+		return get(CREATE_TIME);
+	}
+
 
 }

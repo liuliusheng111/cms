@@ -102,7 +102,9 @@ public class EnterController extends BaseProjectController {
 		json.put("status", 2);// 失败
 
 		TbEnter model = getModel(TbEnter.class);
+		model.setCreateTime(getNow());
 		model.save();
+
 		String imageId1 =getPara("imageId1");
 		String imageId2 =getPara("imageId2");
 		String imageId3 =getPara("imageId3");
@@ -124,7 +126,6 @@ public class EnterController extends BaseProjectController {
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}
-
 
 	//简单上传，使用默认策略，只需要设置上传的空间名就可以了
 	public String getUpToken() {
