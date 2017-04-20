@@ -44,30 +44,32 @@ public class EnterController extends BaseProjectController {
 		try {
 			HttpServletRequest request = getRequest();
 			List<FileItem> items = upload.parseRequest(request);
-			String picturename = StringUtils.EMPTY;
-			String imageName = StringUtils.EMPTY;
-			for (Object object : items) {
-				final FileItem fileItem = (FileItem) object;
-
-				//异步上传到七牛
-				ExecutorProcessPool.getInstance().execute(new Runnable() {
-					@Override
-					public void run() {
-						QiniuUtils.upload2Qiniu(fileItem);
-					}
-				});
-
-				//上传到本地
-				picturename =fileItem.getName();
-				if (picturename==null){
-					continue;
-				}
-				imageName = IdUtils.getIdByUUId()+picturename.substring(picturename.lastIndexOf("."));
-				String webRootPath = FileUploadUtils.getRootPath() ;
-				String storePath = webRootPath + IMG_PATH;
-				String path = storePath + imageName;
-				fileItem.write(new File(path));
+			if (items==null||items.isEmpty()){
+				renderJson(result);
+				return;
 			}
+			final FileItem fileItem = items.get(0);
+			String pictureName =fileItem.getName();
+			if (pictureName==null){
+				renderJson(result);
+				return;
+			}
+			final String imageName = IdUtils.getIdByUUId()+pictureName.substring(pictureName.lastIndexOf("."));
+
+			//异步上传到七牛
+			ExecutorProcessPool.getInstance().execute(new Runnable() {
+				@Override
+				public void run() {
+					QiniuUtils.upload2Qiniu(fileItem.get(),imageName);
+				}
+			});
+
+			//上传到本地
+			String webRootPath = FileUploadUtils.getRootPath() ;
+			String storePath = webRootPath + IMG_PATH;
+			String path = storePath + imageName;
+			fileItem.write(new File(path));
+
 			result.put("url",request.getContextPath()+IMG_PATH+imageName);
 			result.put("name",imageName);
 			result.put("status",1);
@@ -92,12 +94,12 @@ public class EnterController extends BaseProjectController {
 		model.save();
 
 		//保存图片信息
-		TbEnterImg enterImg = getModel(TbEnterImg.class);
+		TbEnterImg enterImg = new TbEnterImg();
 		enterImg.setEnterId(model.getId());
 		enterImg.setImage1Id(getPara("imageId1"));
 		enterImg.setImage2Id(getPara("imageId2"));
 		enterImg.setImage3Id(getPara("imageId3"));
-
+		enterImg.save();
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}

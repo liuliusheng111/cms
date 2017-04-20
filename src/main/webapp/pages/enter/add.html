@@ -170,6 +170,9 @@
             success:function(data){
                 if(data.status==1){
                     $('#form1')[0].reset(); //重置
+                    removeImg(1);
+                    removeImg(2);
+                    removeImg(3);
                     alert('保存成功');
                 } else {
                     alert('保存失败：'+data.msg);
