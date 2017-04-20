@@ -40,20 +40,10 @@ public class QiniuUtils {
         UploadManager uploadManager = new UploadManager(c);
         try {
             String key = "enter/"+name;
-            System.out.println(bytes);
             //调用put方法上传
-            Response res = uploadManager.put(bytes, key, getUpToken());
-            //打印返回的信息
-//            System.out.println(res.bodyString());
+            uploadManager.put(bytes, key, getUpToken());
         } catch (Exception e) {
             e.printStackTrace();
-//            Response r = e.response;
-            //响应的文本信息
-//            try {
-//                System.out.println(r.bodyString());
-//            } catch (QiniuException e1) {
-//                e1.printStackTrace();
-//            }
         }
     }
 
