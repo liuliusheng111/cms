@@ -39,21 +39,21 @@
                         <span class="addimg">
                             <input type="file" id="file1"  accept="image/*" onchange="uploadFile(1)" name="file1"/>
                             <input type="hidden" id="imageId1" name="imageId1">
-                            <img  id="img1"  style="display: none">
-                            <img  id="del1" src="static/enter/images/del.png" style="display: none" onclick="removeImg(1)">
+                            <img  id="img1" class="addedimg"  style="display: none">
+                            <img  id="del1" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(1)">
                         </span>
                         <span class="addimg">
                             <input type="file"  id="file2" accept="image/*" onchange="uploadFile(2)" name="file2"/>
                             <input type="hidden" id="imageId2" name="imageId2">
-                            <img id="img2"  style="display:none">
-                            <img id="del2" src="static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
+                            <img id="img2" class="addedimg"  style="display:none">
+                            <img id="del2" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
 
                         </span>
                         <span class="addimg">
                             <input type="file"  id="file3" accept="image/*" onchange="uploadFile(3)" name="file3"/>
                             <input type="hidden" id="imageId3" name="imageId3">
-                            <img  id="img3"  style="display:none">
-                            <img  id="del3" src="static/enter/images/del.png" style="display: none" onclick="removeImg(3)">
+                            <img  id="img3" class="addedimg"  style="display:none">
+                            <img class="del" id="del3" src="static/enter/images/del.png" style="display: none" onclick="removeImg(3)">
                         </span>
 
                     </div>
@@ -149,6 +149,7 @@
             imageId = $('#imageId3');
         }
         fileObj.show();
+        fileObj.val('');
         fileObj.empty();
         del.hide();
         img.hide();

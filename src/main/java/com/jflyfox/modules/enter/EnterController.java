@@ -48,7 +48,8 @@ public class EnterController extends BaseProjectController {
 				renderJson(result);
 				return;
 			}
-			final FileItem fileItem = items.get(0);
+			FileItem fileItem = items.get(0);
+			final byte[] bytes = fileItem.get();
 			String pictureName =fileItem.getName();
 			if (pictureName==null){
 				renderJson(result);
@@ -60,7 +61,7 @@ public class EnterController extends BaseProjectController {
 			ExecutorProcessPool.getInstance().execute(new Runnable() {
 				@Override
 				public void run() {
-					QiniuUtils.upload2Qiniu(fileItem.get(),imageName);
+					QiniuUtils.upload2Qiniu(bytes,imageName);
 				}
 			});
 
