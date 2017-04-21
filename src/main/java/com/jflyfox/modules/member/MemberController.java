@@ -69,7 +69,7 @@ public class MemberController extends BaseProjectController {
 	public void list() {
 
 		TbMember model = getModelByAttr(TbMember.class);
-		SQLUtils sql = new SQLUtils(" from tb_member " //
+		SQLUtils sql = new SQLUtils(" from tb_member t" //
 				+ " where 1=1 ");
 		if (model.getAttrValues().length != 0) {
 			// 查询条件
