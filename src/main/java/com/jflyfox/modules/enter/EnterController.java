@@ -1,18 +1,26 @@
 package com.jflyfox.modules.enter;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.common.service.threadpool.ExecutorProcessPool;
 import com.jflyfox.common.utils.*;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
+import com.jflyfox.jfinal.component.db.SQLUtils;
+import com.jflyfox.modules.admin.article.TbArticle;
+import com.jflyfox.modules.admin.comment.TbComment;
 import com.jflyfox.system.file.util.FileUploadUtils;
+import com.jflyfox.util.StrUtils;
 import com.qiniu.util.Auth;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpRequest;
 import org.apache.log4j.Logger;
+import org.omg.CORBA.Request;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
@@ -24,7 +32,7 @@ public class EnterController extends BaseProjectController {
 
 
 
-	private static final String path = "/pages/enter/";
+	private static final String path = "/pages/enter/enter_";
 	private static final String IMG_PATH = "/upload/enter/"; //图片上传到服务器的相对路径
 
 	public void index() {
@@ -105,6 +113,61 @@ public class EnterController extends BaseProjectController {
 		renderJson(json.toJSONString());
 	}
 
+	/**
+	 * 列表查询
+	 */
+	public void list() {
 
+		TbEnter model = getModelByAttr(TbEnter.class);
+		SQLUtils sql = new SQLUtils(" from tb_enter t " //
+				+ " where 1=1 ");
+		if (model.getAttrValues().length != 0) {
+			// 查询条件
+			sql.whereLike("name", model.getStr("name"));
+		}
+
+		Page<TbEnter> page = TbEnter.dao.paginate(getPaginator(), "select t.* ", //
+				sql.toString().toString());
+
+		setAttr("page", page);
+		setAttr("attr", model);
+		render(path + "list.html");
+	}
+
+	public void view() {
+		TbEnterImg model = TbEnterImg.dao.findFirst(" select * from tb_enter_img " //
+				+ " where enter_id= "+getParaToInt());
+		setAttr("model", model);
+		render(path + "view.html");
+	}
+
+	/**
+	 * 添加
+	 */
+	public void edit() {
+		TbEnterImg model = TbEnterImg.dao.findFirst(" select * from tb_enter_img " //
+				+ " where enter_id= "+getParaToInt());
+		setAttr("model", model);
+		render(path + "edit.html");
+	}
+
+	public void delete() {
+		// 日志添加
+		TbEnter model = new TbEnter();
+		Integer userid = getSessionUser().getUserID();
+		HttpServletRequest request = this.getRequest();
+		String now = getNow();
+		model.put("update_id", userid);
+		model.put("update_time", now);
+		model.deleteById(getParaToInt());
+
+		TbEnterImg enterImg = TbEnterImg.dao.findFirst(" select id from tb_enter_img " //
+				+ " where enter_id= "+getParaToInt());
+		if (enterImg!=null) {
+			enterImg.delete();
+		}
+
+		list();
+	}
 
 }

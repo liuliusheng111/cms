@@ -48,7 +48,7 @@ public class TbEnterImg extends BaseProjectModel<TbEnterImg> {
 	}
 
 	public String getImage2Id() {
-		return get(IMAGE1_ID);
+		return get(IMAGE2_ID);
 	}
 
 	public TbEnterImg setImage3Id(String value) {
