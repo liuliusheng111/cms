@@ -6,4 +6,5 @@ package com.jflyfox.common;
 public enum  Status {
 	OK, //正常
 	DEL, //删除
+
 }
