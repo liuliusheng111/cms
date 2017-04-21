@@ -1,13 +1,13 @@
-package com.jflyfox.modules.enter;
+package com.jflyfox.modules.member;
 
-import com.jflyfox.jfinal.component.annotation.ModelBind;
 import com.jflyfox.component.base.BaseProjectModel;
+import com.jflyfox.jfinal.component.annotation.ModelBind;
 
-@ModelBind(table = "tb_enter", key = "id")
-public class TbEnter extends BaseProjectModel<TbEnter> {
+@ModelBind(table = "tb_member", key = "id")
+public class TbMember extends BaseProjectModel<TbMember> {
 
 	private static final long serialVersionUID = 1L;
-	public static final TbEnter dao = new TbEnter();
+	public static final TbMember dao = new TbMember();
 
 	private String ID = "id"; // 主键
 	private String NAME = "name"; // 姓名
@@ -16,76 +16,76 @@ public class TbEnter extends BaseProjectModel<TbEnter> {
 	private String AGE = "age"; // 年龄
 	private String GENDER = "gender"; // 性别
 	private String CREATE_TIME = "create_time"; // 创建时间
-	private String STATUS = "status"; //0表示正常，1删除
+	private String STATUS = "status"; //0正常，1 删除
 
 
 
-	public TbEnter setId(java.lang.Integer value) {
+	public TbMember setId(Integer value) {
 		set(ID, value);
 		return this;
 	}
 
-	public java.lang.Integer getId() {
+	public Integer getId() {
 		return get(ID);
 	}
 
-	public TbEnter setName(java.lang.String value) {
+	public TbMember setName(String value) {
 		set(NAME, value);
 		return this;
 	}
 
-	public java.lang.String getName() {
+	public String getName() {
 		return get(NAME);
 	}
 
-	public TbEnter setAddress(java.lang.String value) {
+	public TbMember setAddress(String value) {
 		set(ADDRESS, value);
 		return this;
 	}
 
-	public java.lang.String getAddress() {
+	public String getAddress() {
 		return get(ADDRESS);
 	}
 
-	public TbEnter setPhone(java.lang.String value) {
+	public TbMember setPhone(String value) {
 		set(PHONE, value);
 		return this;
 	}
 
-	public java.lang.String getPhone() {
+	public String getPhone() {
 		return get(PHONE);
 	}
 
 
-	public TbEnter setAge(java.lang.Integer value) {
+	public TbMember setAge(Integer value) {
 		set(AGE, value);
 		return this;
 	}
 
-	public java.lang.Integer getAge() {
+	public Integer getAge() {
 		return get(AGE);
 	}
 
 
-	public TbEnter setGender(java.lang.Integer value) {
+	public TbMember setGender(Integer value) {
 		set(GENDER, value);
 		return this;
 	}
 
-	public java.lang.Integer getGender() {
+	public Integer getGender() {
 		return get(GENDER);
 	}
 
-	public TbEnter setCreateTime(java.lang.String value) {
+	public TbMember setCreateTime(String value) {
 		set(CREATE_TIME, value);
 		return this;
 	}
 
-	public java.lang.String getCreateTime() {
+	public String getCreateTime() {
 		return get(CREATE_TIME);
 	}
 
-	public TbEnter setStatus(java.lang.Integer value) {
+	public TbMember setStatus(java.lang.Integer value) {
 		set(STATUS, value);
 		return this;
 	}

@@ -33,13 +33,13 @@ public class QiniuUtils {
      * @param bytes 上传对象
      * @param name 名称
      */
-    public static void upload2Qiniu(byte[] bytes,String name) {
+    public static void upload2Qiniu(byte[] bytes,String name,String path) {
         Zone z = Zone.autoZone();
         Configuration c = new Configuration(z);
         //创建上传对象
         UploadManager uploadManager = new UploadManager(c);
         try {
-            String key = "enter/"+name;
+            String key = path+"/"+name;
             //调用put方法上传
             uploadManager.put(bytes, key, getUpToken());
         } catch (Exception e) {
