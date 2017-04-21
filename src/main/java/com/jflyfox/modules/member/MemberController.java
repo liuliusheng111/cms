@@ -2,11 +2,10 @@ package com.jflyfox.modules.member;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.plugin.activerecord.Page;
-import com.jflyfox.common.Status;
+import com.jflyfox.common.TbStatus;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
-import com.jflyfox.modules.enter.EnterController;
 import com.jflyfox.modules.enter.TbUserImg;
 import com.jflyfox.modules.enter.UploadImgService;
 import org.apache.log4j.Logger;
@@ -49,6 +48,7 @@ public class MemberController extends BaseProjectController {
 		//保存投稿信息
 		TbMember model = getModel(TbMember.class);
 		model.setCreateTime(getNow());
+		model.setStatus(TbStatus.OK.ordinal());
 		model.save();
 
 		//保存图片信息
@@ -57,6 +57,7 @@ public class MemberController extends BaseProjectController {
 		userImg.setImage1Id(getPara("imageId1"));
 		userImg.setImage2Id(getPara("imageId2"));
 		userImg.setImage3Id(getPara("imageId3"));
+		userImg.setStatus(TbStatus.OK.ordinal());
 		userImg.setType(2);
 		userImg.save();
 		json.put("status", 1);// 成功
@@ -70,7 +71,7 @@ public class MemberController extends BaseProjectController {
 
 		TbMember model = getModelByAttr(TbMember.class);
 		SQLUtils sql = new SQLUtils(" from tb_member t" //
-				+ " where 1=1 ");
+				+ " where 1=1 and status!=1 ");
 		if (model.getAttrValues().length != 0) {
 			// 查询条件
 			sql.whereLike("name", model.getStr("name"));
@@ -86,7 +87,7 @@ public class MemberController extends BaseProjectController {
 
 	public void view() {
 		TbUserImg model = TbUserImg.dao.findFirst(" select * from tb_user_img " //
-				+ " where type=2 and user_id= "+getParaToInt());
+				+ " where type=2  and user_id= "+getParaToInt());
 		setAttr("model", model);
 		render(path + "view.html");
 	}
@@ -104,14 +105,14 @@ public class MemberController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		TbMember model = new TbMember().findById(getParaToInt());
-		model.setStatus(Status.DEL.ordinal());
-		model.save();
+		model.setStatus(TbStatus.DEL.ordinal());
+		model.update();
 
 		TbUserImg userImg = TbUserImg.dao.findFirst(" select id from tb_user_img " //
 				+ " where type=2 and user_id= "+getParaToInt());
 		if (userImg!=null) {
-			userImg.setStatus(Status.DEL.ordinal());
-			userImg.save();
+			userImg.setStatus(TbStatus.DEL.ordinal());
+			userImg.update();
 		}
 
 		list();

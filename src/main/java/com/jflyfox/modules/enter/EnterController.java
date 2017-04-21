@@ -2,22 +2,12 @@ package com.jflyfox.modules.enter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.plugin.activerecord.Page;
-import com.jflyfox.common.Status;
-import com.jflyfox.common.service.threadpool.ExecutorProcessPool;
-import com.jflyfox.common.utils.*;
+import com.jflyfox.common.TbStatus;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
-import com.jflyfox.system.file.util.FileUploadUtils;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.util.List;
 
 @ControllerBind(controllerKey = "/enter")
 public class EnterController extends BaseProjectController {
@@ -56,6 +46,7 @@ public class EnterController extends BaseProjectController {
 		//保存投稿信息
 		TbEnter model = getModel(TbEnter.class);
 		model.setCreateTime(getNow());
+		model.setStatus(TbStatus.OK.ordinal());
 		model.save();
 
 		//保存图片信息
@@ -64,6 +55,7 @@ public class EnterController extends BaseProjectController {
 		userImg.setImage1Id(getPara("imageId1"));
 		userImg.setImage2Id(getPara("imageId2"));
 		userImg.setImage3Id(getPara("imageId3"));
+		userImg.setStatus(TbStatus.OK.ordinal());
 		userImg.setType(1);
 		userImg.save();
 		json.put("status", 1);// 成功
@@ -77,7 +69,7 @@ public class EnterController extends BaseProjectController {
 
 		TbEnter model = getModelByAttr(TbEnter.class);
 		SQLUtils sql = new SQLUtils(" from tb_enter t " //
-				+ " where 1=1 ");
+				+ " where 1=1 and status!=1 ");
 		if (model.getAttrValues().length != 0) {
 			// 查询条件
 			sql.whereLike("name", model.getStr("name"));
@@ -111,15 +103,15 @@ public class EnterController extends BaseProjectController {
 	public void delete() {
 		// 日志添加
 		TbEnter model = TbEnter.dao.findById(getParaToInt());
-		model.setStatus(Status.DEL.ordinal());
-		model.save();
+		model.setStatus(TbStatus.DEL.ordinal());
+		model.update();
 
 
 		TbUserImg userImg = TbUserImg.dao.findFirst(" select id from tb_user_img " //
 				+ " where type=1 and user_id= "+getParaToInt());
 		if (userImg!=null) {
-			userImg.setStatus(Status.DEL.ordinal());
-			userImg.save();
+			userImg.setStatus(TbStatus.DEL.ordinal());
+			userImg.update();
 		}
 
 		list();
