@@ -9,20 +9,21 @@ var bodyContent = {
 	<!-- 数据列表 -->
 	<table class="table">
 		<%  // 列表头部 %>
-			<tr>
-				<td>会员稿1</td>
-				<td><img src="upload/member/${model.image1Id}"  style="height: 600px"/></td>
+        <%if(!isEmpty(model.image1Id)) {%>
+            <tr>
+                <td><img src="upload/member/${model.image1Id}"  style="height: 600px"/></td>
+            </tr>
+        <%}%>
+        <%if(!isEmpty(model.image2Id)) {%>
+            <tr>
+                <td><img src="upload/member/${model.image2Id}"  style="height: 600px"/></td>
 			</tr>
-			<tr>
-				<td>会员稿2</td>
-
-				<td><img src="upload/member/${model.image2Id}"  style="height: 600px"/></td>
-			</tr>
-			<tr>
-				<td>会员稿3</td>
-
+        <%}%>
+        <%if(!isEmpty(model.image3Id)) {%>
+            <tr>
 				<td><img src="upload/member/${model.image3Id}"  style="height: 300px"/></td>
 			</tr>
+        <%}%>
 	</table>
 	
 	<div style="height: 50px;clear: both;">&nbsp;</div>
