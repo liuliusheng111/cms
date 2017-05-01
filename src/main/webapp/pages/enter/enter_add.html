@@ -70,7 +70,7 @@
                 </div>
                 <div class="field declaration">
                     <p class="fn-clear"><label>参赛者年龄</label>
-                        <input type="text" placeholder="(必填)" name="model.age"/>
+                        <input type="text" placeholder="(选填)" name="model.age"/>
                     </p>
                 </div>
                 <div class="tojoin">
@@ -161,6 +161,7 @@
      * @returns {boolean}
      */
     function oper_save() {
+        validThisForm();
         if(!validForm()) {
             return false;
         }
@@ -185,6 +186,29 @@
                 alert("服务器忙，提交数据失败，请联系管理员！");
             }
         });
+    }
+    
+    function validThisForm() {
+        var imageId1 = $('#imageId1').val();
+        var imageId2 = $('#imageId2').val();
+        var imageId3 = $('#imageId3').val();
+        var name= $('input[name="model.name"]').val();
+        var phone= $('input[name="model.phone"]').val();
+        var address= $('input[name="model.address"]').val();
+        var alertStr = "";
+        if($.trim(name).length==0){
+            alertStr+="姓名不能为空\r\n";
+        }
+        if($.trim(imageId1).length==0&&$.trim(imageId2).length==0&&$.trim(imageId3).length==0){
+            alertStr+="稿件不能为空\r\n";
+        }
+        if($.trim(address).length==0){
+            alertStr+="地址不能为空\r\n";
+        }
+        if(alertStr.length>0){
+            alert(alertStr);
+            return false;
+        }
     }
 </script>
 <script type="text/javascript" src="static/common/valid.js"></script>
