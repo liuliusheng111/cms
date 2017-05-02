@@ -35,22 +35,27 @@ public class TbUserFile extends BaseProjectModel<TbUserFile> {
     }
 
 
-    public TbUserFile setResume(Integer value) {
+    public TbUserFile setResume(String value) {
         set(RESUME, value);
         return this;
     }
 
-    public Integer getResume() {
+    public String  getResume() {
         return get(RESUME);
     }
 
-    public TbUserFile setPhoto(Integer value) {
+    public TbUserFile setPhoto(String value) {
         set(PHOTO, value);
         return this;
     }
 
-    public Integer getPhoto() {
+    public String getPhoto() {
         return get(PHOTO);
+    }
+
+    public TbUserFile setStatus(java.lang.Integer value) {
+        set(STATUS, value);
+        return this;
     }
 
     public java.lang.Integer getStatus() {
