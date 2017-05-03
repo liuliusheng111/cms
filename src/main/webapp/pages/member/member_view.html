@@ -9,6 +9,9 @@ var bodyContent = {
 	<!-- 数据列表 -->
 	<table class="table">
 		<%  // 列表头部 %>
+		<tr>
+			<td>会员作品: </td>
+		</tr>
         <%if(!isEmpty(model.image1Id)) {%>
             <tr>
                 <td><img src="upload/member/${model.image1Id}"  style="height: 600px"/></td>
@@ -24,6 +27,20 @@ var bodyContent = {
 				<td><img src="upload/member/${model.image3Id}"  style="height: 300px"/></td>
 			</tr>
         <%}%>
+
+		<%if(!isEmpty(file.photo)) {%>
+		<tr>
+			<td>会员头像: </td>
+		</tr>
+		<tr>
+			<td><img src="upload/member/${file.photo}"  style="height: 600px"/></td>
+		</tr>
+		<%}%>
+		<%if(!isEmpty(file.resume)) {%>
+		<tr>
+			<td><a href="upload/member/${file.resume}">简历下载</a></td>
+		</tr>
+		<%}%>
 	</table>
 	
 	<div style="height: 50px;clear: both;">&nbsp;</div>

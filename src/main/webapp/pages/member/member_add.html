@@ -10,8 +10,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="icon" href="${BASE_PATH }favicon.ico" />
-    <link rel="stylesheet" href="static/enter/css/common/base_rem.css?ver=0421"/>
-    <link rel="stylesheet" href="static/enter/css/app/enter.css?var=0421"/>
+    <link rel="stylesheet" href="static/enter/css/common/base_rem.css?ver=0503"/>
+    <link rel="stylesheet" href="static/enter/css/app/enter.css?var=0503"/>
     <!-- 验证工具 -->
     <script>
         var deviceWidth = document.documentElement.clientWidth;
@@ -58,6 +58,28 @@
 
                     </div>
                 </div>
+                <div class="photo fn-clear">
+                    <div class="photo_l"><label>会员头像</label></div>
+                    <div class="photo_r">
+                        <span class="addimg">
+                            <input type="file" id="file4"  accept="image/*" onchange="uploadFile(4)" name="file4"/>
+                            <input type="hidden" id="photo" name="photo">
+                            <img  id="pho" class="addedimg"  style="display: none">
+                            <img  id="del4" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(4)">
+                        </span>
+                    </div>
+                </div>
+                <div class="photo fn-clear">
+                    <div class="photo_l"><label>会员简历</label></div>
+                    <div class="photo_r">
+                        <span class="addimg">
+                            <input type="file" id="file5" onchange="uploadFile(5)" name="file5"/>
+                            <input type="hidden" id="resume" name="resume">
+                            <img id="res"  class="addedimg" style="display: none" >
+                            <img  id="del5" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(5)">
+                        </span>
+                    </div>
+                </div>
                 <div class="field phone">
                     <p class="fn-clear"><label>手机号码</label>
                         <input type="text" placeholder="(必填)" name="model.phone"/>
@@ -101,6 +123,18 @@
             img = $('#img3');
             del = $('#del3');
             imageId = $('#imageId3');
+        }else if(index==4){
+            data.append('file', $('#file4')[0].files[0]);
+            fileObj = $('#file4');
+            img = $('#pho');
+            del = $('#del4');
+            imageId = $('#photo');
+        }else if(index==5){
+            data.append('file', $('#file5')[0].files[0]);
+            fileObj = $('#file5');
+            img = $('#res');
+            del = $('#del5');
+            imageId = $('#resume');
         }
         $.ajax({
             url: 'member/uploadFile',
@@ -111,7 +145,11 @@
         }).done(function(data){
             if (data.status==1) {
                 fileObj.hide();
-                img.attr('src',data.url);
+                if(index ==5){
+                    img.attr('src', "static/enter/images/file.png");
+                }else {
+                    img.attr('src', data.url);
+                }
                 img.show();
                 del.show();
                 imageId.val(data.name);
@@ -142,6 +180,16 @@
             img = $('#img3');
             del = $('#del3');
             imageId = $('#imageId3');
+        }else if(index==4){
+            fileObj = $('#file4');
+            img = $('#pho');
+            del = $('#del4');
+            imageId = $('#photo');
+        }else if(index==5){
+            fileObj = $('#file5');
+            img = $('#res');
+            del = $('#del5');
+            imageId = $('#resume');
         }
         fileObj.show();
         fileObj.val('');
@@ -156,7 +204,7 @@
      * @returns {boolean}
      */
     function oper_save() {
-        if(!validForm()) {
+        if (!validThisForm()){
             return false;
         }
         jQuery.ajax({
@@ -169,6 +217,8 @@
                     removeImg(1);
                     removeImg(2);
                     removeImg(3);
+                    removeImg(4);
+                    removeImg(5);
                     alert('保存成功');
                 } else {
                     alert('保存失败：'+data.msg);
@@ -181,6 +231,43 @@
             }
         });
     }
+
+    function validThisForm() {
+        var imageId1 = $('#imageId1').val();
+        var imageId2 = $('#imageId2').val();
+        var imageId3 = $('#imageId3').val();
+        var name= $('input[name="model.name"]').val();
+        var phone= $('input[name="model.phone"]').val();
+        var address= $('input[name="model.address"]').val();
+        var alertStr = "";
+
+        if($.trim(name).length==0){
+            alertStr+="姓名不能为空\r\n";
+        }
+        if($.trim(imageId1).length==0&&$.trim(imageId2).length==0&&$.trim(imageId3).length==0){
+            alertStr+="作品不能为空\r\n";
+        }
+        if($.trim(address).length==0){
+            alertStr+="地址不能为空\r\n";
+        }
+        if($.trim(phone).length==0||!checkMobile($.trim(phone))){
+            alertStr+="电话号码错误\r\n";
+        }
+        if(alertStr.length>0){
+            alert(alertStr);
+            return false;
+        }
+        return true;
+    }
+    function checkMobile(str) {
+        var re = /^1\d{10}$/
+        if (re.test(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 </script>
 <script type="text/javascript" src="static/common/valid.js"></script>
 <script type="text/javascript" src="static/component/ueditor/third-party/jquery-1.10.2.min.js"></script>

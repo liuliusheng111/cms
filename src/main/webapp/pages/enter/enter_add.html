@@ -161,8 +161,7 @@
      * @returns {boolean}
      */
     function oper_save() {
-        validThisForm();
-        if(!validForm()) {
+        if(!validThisForm()) {
             return false;
         }
         jQuery.ajax({
@@ -175,7 +174,7 @@
                     removeImg(1);
                     removeImg(2);
                     removeImg(3);
-                    alert('保存成功');
+                    alert('报名成功');
                 } else {
                     alert('保存失败：'+data.msg);
                 }
@@ -200,16 +199,30 @@
             alertStr+="姓名不能为空\r\n";
         }
         if($.trim(imageId1).length==0&&$.trim(imageId2).length==0&&$.trim(imageId3).length==0){
-            alertStr+="稿件不能为空\r\n";
+            alertStr+="作品不能为空\r\n";
         }
         if($.trim(address).length==0){
             alertStr+="地址不能为空\r\n";
+        }
+        if($.trim(phone).length==0||!checkMobile($.trim(phone))){
+            alertStr+="电话号码错误\r\n";
         }
         if(alertStr.length>0){
             alert(alertStr);
             return false;
         }
+        return true;
     }
+
+    function checkMobile(str) {
+        var re = /^1\d{10}$/
+        if (re.test(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 </script>
 <script type="text/javascript" src="static/common/valid.js"></script>
 <script type="text/javascript" src="static/component/ueditor/third-party/jquery-1.10.2.min.js"></script>

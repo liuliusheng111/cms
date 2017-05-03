@@ -6,6 +6,7 @@ import com.jflyfox.common.TbStatus;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
+import com.jflyfox.modules.enter.TbUserFile;
 import com.jflyfox.modules.enter.TbUserImg;
 import com.jflyfox.modules.enter.UploadImgService;
 import org.apache.log4j.Logger;
@@ -60,6 +61,15 @@ public class MemberController extends BaseProjectController {
 		userImg.setStatus(TbStatus.OK.ordinal());
 		userImg.setType(2);
 		userImg.save();
+
+		//保存照片,简历等信息
+		TbUserFile userFile = new TbUserFile();
+		userFile.setUserId(model.getId());
+		userFile.setPhoto(getPara("photo"));
+		userFile.setResume(getPara("resume"));
+		userFile.setStatus(TbStatus.OK.ordinal());
+		userFile.save();
+
 		json.put("status", 1);// 成功
 		renderJson(json.toJSONString());
 	}
@@ -87,8 +97,13 @@ public class MemberController extends BaseProjectController {
 
 	public void view() {
 		TbUserImg model = TbUserImg.dao.findFirst(" select * from tb_user_img " //
-				+ " where type=2  and user_id= "+getParaToInt());
+				+ " where type=2 and status=0 and user_id= "+getParaToInt());
 		setAttr("model", model);
+
+		TbUserFile file = TbUserFile.dao.findFirst(" select * from tb_user_file "
+				+ " where  user_id= "+getParaToInt()+" and status=0 ");
+		setAttr("model", model);
+		setAttr("file", file);
 		render(path + "view.html");
 	}
 
