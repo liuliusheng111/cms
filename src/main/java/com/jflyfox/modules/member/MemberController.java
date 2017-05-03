@@ -130,6 +130,13 @@ public class MemberController extends BaseProjectController {
 			userImg.update();
 		}
 
+		TbUserFile userFile = TbUserFile.dao.findFirst(" select id from tb_user_file " //
+				+ " where  user_id= "+getParaToInt());
+		if (userFile!=null) {
+			userFile.setStatus(TbStatus.DEL.ordinal());
+			userFile.update();
+		}
+
 		list();
 	}
 
