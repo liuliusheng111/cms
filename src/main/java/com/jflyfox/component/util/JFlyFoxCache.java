@@ -59,7 +59,7 @@ public class JFlyFoxCache {
 		if (headTitleDict != null) {
 			headTitle = headTitleDict.getStr("detail_name");
 		} else {
-			headTitle = "门头沟信息网";
+			headTitle = "天津硬笔书法协会";
 		}
 		cache.add("headTitle", headTitle);
 
