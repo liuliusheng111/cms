@@ -65,9 +65,7 @@ public class TemplateService extends BaseService {
 	 * 获取标签信息
 	 * 
 	 * 2015年5月25日 下午11:49:58 flyfox 369191470@qq.com
-	 * 
-	 * @param paginator
-	 * @param folderId
+	 *
 	 *            目录
 	 * @return
 	 */
@@ -80,7 +78,6 @@ public class TemplateService extends BaseService {
 	 * 
 	 * 2015年5月25日 下午11:49:58 flyfox 369191470@qq.com
 	 * 
-	 * @param paginator
 	 * @param folderId
 	 *            目录
 	 * @return
@@ -94,7 +91,6 @@ public class TemplateService extends BaseService {
 	 * 
 	 * 2015年5月25日 下午11:49:03 flyfox 369191470@qq.com
 	 * 
-	 * @param paginator
 	 * @return
 	 */
 	public Page<TbTags> tagsPage(int pageNo, int pageSize, int siteId) {
@@ -105,9 +101,7 @@ public class TemplateService extends BaseService {
 	 * 查询文章，展示的和类型为11,12的推荐文件,前10个
 	 * 
 	 * 2015年4月29日 下午4:48:24 flyfox 369191470@qq.com
-	 * 
-	 * @param paginator
-	 * @param folder_id
+	 *
 	 * @return
 	 */
 	public Page<TbArticle> articlePageRecommend(int pageNo, int pageSize, int siteId) {
@@ -118,9 +112,8 @@ public class TemplateService extends BaseService {
 	 * 返回最新文章
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
-	 * 
-	 * @param paginator
-	 * @return
+	 *
+	 * * @return
 	 */
 	public Page<TbArticle> articlePageTop(int pageNo, int pageSize, int siteId) {
 		return service.getNewArticle(new Paginator(pageNo, pageSize), siteId);
@@ -130,9 +123,7 @@ public class TemplateService extends BaseService {
 	 * 返回文章列表
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
-	 * 
-	 * @param paginator
-	 * @param folderId
+	 *
 	 * @return
 	 */
 	public Page<TbArticle> articlePageSite(int pageNo, int pageSize, int siteId) {
@@ -159,7 +150,6 @@ public class TemplateService extends BaseService {
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
-	 * @param paginator
 	 * @param folderId
 	 * @return
 	 */
@@ -172,7 +162,6 @@ public class TemplateService extends BaseService {
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
-	 * @param paginator
 	 * @param folderId
 	 * @return
 	 */
@@ -184,9 +173,7 @@ public class TemplateService extends BaseService {
 	 * 返回对应文章
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
-	 * 
-	 * @param paginator
-	 * @param folderId
+	 *
 	 * @return
 	 */
 	public TbArticle article(int articleId) {
