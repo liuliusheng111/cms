@@ -5,17 +5,17 @@ var topPics = temp.rollPicture(1);
 // 最新动态
 var newArticles = temp.articlePageTop(1, 10, session.site.siteId);
 
-// 新闻 2
-var news = temp.articlePage(1, 10, 2);
+// 新闻中心
+var news = temp.articlePage(1, 10, 3);
 
-// 美食 3
-var foods = temp.articlePage(1, 10, 3);
+// 名家书法作品
+var travels = temp.articlePage(1, 9, 277);
 
-// 旅游 4
-var travels = temp.articlePage(1, 9, 4);
+// 活动集锦
+var active = temp.articlePage(1, 10, 4);
 
-// 教育 5
-var educations = temp.articlePage(1, 10,5);
+// 教育培训 284
+var educations = temp.articlePage(1, 10,284);
 
 // 公告
 var noticeList = temp.notice(1);
@@ -206,12 +206,45 @@ var bodyContent = {
 		<%
 			} 
 		%>
-	  	<!-- 旅游 -->
+
+	  <!-- 新闻中心 -->
+	  <div class="panel panel-default">
+		  <div class="panel-heading">
+			  <h3 class="panel-title">
+				  <a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">新闻中心</a>
+				  <a class="more" href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">更多</a>
+			  </h3>
+		  </div>
+		  <div class="panel-body">
+
+			  <div class="row">
+				  <% for(item in news.list){ %>
+				  <div class="col-sm-6 col-md-4">
+					  <div class="thumbnail">
+						  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
+							  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+						  </a>
+						  <div class="caption">
+							  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
+						  </div>
+					  </div>
+				  </div>
+				  <% if(itemLP.index%3==0){ %>
+			  </div>
+			  <div class="row">
+				  <% } %>
+				  <% } %>
+			  </div>
+
+		  </div>
+	  </div>
+
+	  	<!-- 名家书法作品 -->
 	  	<div class="panel panel-default">
 		  <div class="panel-heading">
 		  	<h3 class="panel-title">
-				<a href="${BASE_PATH }${flyfox.getMenu(4)}.html" target="_blank">旅游</a>
-				<a class="more" href="${BASE_PATH }${flyfox.getMenu(4)}.html" target="_blank">更多</a>
+				<a href="${BASE_PATH }${flyfox.getMenu(277)}.html" target="_blank">名家书法作品</a>
+				<a class="more" href="${BASE_PATH }${flyfox.getMenu(277)}.html" target="_blank">更多</a>
 			</h3>
 		  </div>
 		  <div class="panel-body">
@@ -237,8 +270,10 @@ var bodyContent = {
 	
 		  </div>
 		</div>
-		
+
+
 		<!-- 地图 -->
+		  <!--
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 			<h3 class="panel-title">地图</h3>
@@ -249,21 +284,22 @@ var bodyContent = {
 		    </div>
 		  </div>
 		</div>
+		-->
 	  </div>
 	
 	  <div class="col-md-4">	
 		
-		<!-- 美食 -->
+		<!-- 活动集锦 -->
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		  	<h3 class="panel-title">
-				<a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">美食</a>
-				<a class="more" href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">更多</a>
+				<a href="${BASE_PATH }${flyfox.getMenu(4)}.html" target="_blank">活动集锦</a>
+				<a class="more" href="${BASE_PATH }${flyfox.getMenu(4)}.html" target="_blank">更多</a>
 			</h3>
 		  </div>
 		  <div class="panel-body" style="padding-bottom:0px;">
 			<div class="row">
-			  <% for(item in foods.list){ %>
+			  <% for(item in active.list){ %>
 			  	<% if(itemLP.index <= 2){ %>
 			  	 <div class="col-md-6">
 					<div class="thumbnail">
@@ -281,7 +317,7 @@ var bodyContent = {
 		  </div>
 			
 		 <ul class="list-group">
-		  	<% for(item in foods.list){ %>
+		  	<% for(item in active.list){ %>
 		  		<% if(itemLP.index > 2){ %>
 				<li class="list-group-item">
 					<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
@@ -299,12 +335,12 @@ var bodyContent = {
 			
 		</div>
 		
-		<!-- 教育 -->
+		<!-- 教育培训 -->
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 			<h3 class="panel-title">
-				<a href="${BASE_PATH }${flyfox.getMenu(5)}.html" target="_blank">教育</a>
-				<a class="more" href="${BASE_PATH }${flyfox.getMenu(5)}.html" target="_blank">更多</a>
+				<a href="${BASE_PATH }${flyfox.getMenu(284)}.html" target="_blank">教育培训</a>
+				<a class="more" href="${BASE_PATH }${flyfox.getMenu(284)}.html" target="_blank">更多</a>
 			</h3>
 		  </div>
 		  
