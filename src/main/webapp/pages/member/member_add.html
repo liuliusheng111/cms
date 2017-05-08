@@ -260,6 +260,7 @@
         var name= $('input[name="model.name"]').val();
         var phone= $('input[name="model.phone"]').val();
         var address= $('input[name="model.address"]').val();
+        var idcard= $('input[name="model.idcard"]').val();
         var alertStr = "";
 
         if($.trim(name).length==0){
@@ -274,6 +275,13 @@
         if($.trim(phone).length==0||!checkMobile($.trim(phone))){
             alertStr+="电话号码错误\r\n";
         }
+
+        if($.trim(idcard).length==0||!isCardNo($.trim(idcard))){
+            alertStr+="你输入的身份证不合法\r\n";
+        }
+
+
+
         if(alertStr.length>0){
             alert(alertStr);
             return false;
@@ -287,6 +295,18 @@
         } else {
             return false;
         }
+    }
+
+    //验证身份证号码
+    function isCardNo(card)
+    {
+        // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if(reg.test(card) === false)
+        {
+            return  false;
+        }
+        return true;
     }
 
 </script>
