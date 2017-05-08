@@ -5,13 +5,14 @@ img{vertical-align: middle;}
 .main .fillinfo_title{text-align: center;padding-bottom: 0.4rem;}
 .main .fillinfo_title span{display: inline-block;width:2.08rem;height:0.56rem;
 background: url("../../images/bg/prize_bg.png") no-repeat;background-size: 100% 100%;line-height:0.56rem;color:#fff;font-size:16px;}
-.main .fillinfo .field{padding-bottom: 0.4rem;}
+.main .fillinfo .field{padding-bottom: 0.2rem;}
 .main .fillinfo .declaration{padding-bottom: 0;}
 .main .fillinfo .field label{font-size:16px;color:#434343;display: inline-block;width:2.25rem;float:left;
-height:0.7rem;line-height:0.7rem;}
+height:0.7rem;line-height:0.3rem;}
 .main .fillinfo .field input{border:0;width:4.65rem;box-sizing: border-box;height:0.7rem;line-height: 0.5rem;padding:0.05rem;
 border-bottom:thin solid #BCBCBC;font-size: 15px;}
-.main .fillinfo .photo{padding-bottom:0.4rem}
+
+.main .fillinfo .photo{padding-bottom:0.2rem}
 .main .fillinfo .photo_l{font-size:16px;color:#434343;display: inline-block;width:2.25rem;float:left;
 height:0.7rem;line-height: 0.7rem;}
 .main .fillinfo .photo_r{width:4.65rem;border-bottom: thin solid #BCBCBC;float:left; padding-bottom: 0.2rem;}
@@ -20,7 +21,7 @@ border:thin solid #BCBCBC;margin-right: 0.23rem;border-radius: 0.08rem;float:lef
 .main .fillinfo .photo_r .joinimg{border: 0;overflow: hidden;}
 .main .fillinfo .photo_r .addimg{background: url("../../images/bg/add.png") no-repeat center center;background-size: 0.5rem 0.5rem;}
 .main .fillinfo .photo_r .addimg input{opacity: 0;width:100%;height:100%;}
-.main .fillinfo .tojoin{padding-top:1rem;}
+.main .fillinfo .tojoin{padding-top:0.4rem;}
 .main .fillinfo .tojoin input{display: block;width:100%;height:0.8rem;background: #3DA1FF;border-radius: 0.12rem;color:#fff;
 line-height: 0.8rem;text-align: center;font-size: 18px;letter-spacing: 1px;border: 0;}
 .main .fillinfo .photo_r .addimg{position: relative;}

@@ -67,8 +67,7 @@ public class FrontCacheService extends BaseService {
 	 * 
 	 * 2015年5月25日 下午11:49:58 flyfox 369191470@qq.com
 	 * 
-	 * @param paginator
-	 * @param folderId
+
 	 *            目录
 	 * @return
 	 */
@@ -122,7 +121,6 @@ public class FrontCacheService extends BaseService {
 	 * 2015年4月29日 下午4:48:24 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
-	 * @param folder_id
 	 * @return
 	 */
 	public Page<TbArticle> getRecommendArticle(Paginator paginator, int siteId) {
@@ -162,7 +160,6 @@ public class FrontCacheService extends BaseService {
 	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
-	 * @param folderId
 	 * @return
 	 */
 	public Page<TbArticle> getArticleBySiteId(Paginator paginator, int siteId) {
@@ -182,7 +179,6 @@ public class FrontCacheService extends BaseService {
 	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
 	 * 
 	 * @param paginator
-	 * @param folderId
 	 * @return
 	 */
 	public Page<TbArticle> getArticleByOrder(Paginator paginator, int siteId, int orderType) {
@@ -245,9 +241,7 @@ public class FrontCacheService extends BaseService {
 	 * 返回对应文章
 	 * 
 	 * 2015年5月24日 下午10:52:05 flyfox 369191470@qq.com
-	 * 
-	 * @param paginator
-	 * @param folderId
+	 *
 	 * @return
 	 */
 	public TbArticle getArticle(int articleId) {

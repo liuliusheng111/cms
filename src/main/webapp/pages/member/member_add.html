@@ -29,10 +29,22 @@
             <form name="form" id="form1" action="member/add" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="model.id" value="${model.id}" />
                 <div class="field name">
+                    <p class="fn-clear"><label>会员类型</label>
+                        <label style="position: relative;width: 1.5rem;float: left;height: 0.4rem;">
+                            少儿<input checked="checked"  type="radio" style="width: 1rem;height:0.5rem;-webkit-appearance:radio;vertical-align:text-top; margin-top:0;"  valid="vtext" name="model.type" value="child"/>
+                        </label>
+                        <label style="position: relative;width: 1.5rem;">
+                            成人<input type="radio" style="width: 1rem;height:0.5rem;-webkit-appearance:radio"   valid="vtext" name="model.type" value="grownup"/>
+                        </label>
+                    </p>
+
+                </div>
+                <div class="field name">
                     <p class="fn-clear"><label>会员姓名</label>
                         <input type="text" placeholder="(必填)" valid="vtext" name="model.name"/>
                     </p>
                 </div>
+
                 <div class="photo fn-clear">
                     <div class="photo_l"><label>会员作品</label></div>
                     <div class="photo_r">
@@ -49,12 +61,14 @@
                             <img id="del2" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
 
                         </span>
+                        <!--
                         <span class="addimg">
                             <input type="file"  id="file3" accept="image/*" onchange="uploadFile(3)" name="file3"/>
                             <input type="hidden" id="imageId3" name="imageId3">
                             <img  id="img3" class="addedimg"  style="display:none">
                             <img class="del" id="del3" src="static/enter/images/del.png" style="display: none" onclick="removeImg(3)">
                         </span>
+                        -->
 
                     </div>
                 </div>
@@ -82,14 +96,21 @@
                 </div>
                 <div class="field phone">
                     <p class="fn-clear"><label>手机号码</label>
-                        <input type="text" placeholder="(必填)" name="model.phone"/>
+                        <input type="text" placeholder="(必填,本人或监护人手机号)" name="model.phone"/>
                     </p>
                 </div>
                 <div class="field declaration">
                     <p class="fn-clear"><label>会员地址</label>
-                        <input type="text" placeholder="(必填)" name="model.address"/>
+                        <input type="text" placeholder="(必填,请详细填写,便于寄送资料)" name="model.address"/>
                     </p>
                 </div>
+
+                <div class="field name">
+                    <p class="fn-clear"><label>身份证号码</label>
+                        <input type="text" placeholder="(必填,本人或监护人身份证号码)" valid="vtext" name="model.idcard"/>
+                    </p>
+                </div>
+
                 <div class="tojoin">
                     <input type="button" onclick="oper_save()" value="确认注册"/>
                 </div>

@@ -17,6 +17,9 @@ public class TbMember extends BaseProjectModel<TbMember> {
 	private String GENDER = "gender"; // 性别
 	private String CREATE_TIME = "create_time"; // 创建时间
 	private String STATUS = "status"; //0正常，1 删除
+	private String IDCARD = "idcard"; //身份证号码
+	private String TYPE = "type"; //类别 少儿child,成人grownup
+
 
 
 
@@ -92,6 +95,24 @@ public class TbMember extends BaseProjectModel<TbMember> {
 
 	public java.lang.Integer getStatus() {
 		return get(STATUS);
+	}
+
+	public TbMember setType(String value) {
+		set(TYPE, value);
+		return this;
+	}
+
+	public String getType() {
+		return get(TYPE);
+	}
+
+	public TbMember setIdcard(String value) {
+		set(IDCARD, value);
+		return this;
+	}
+
+	public String getIdcard() {
+		return get(IDCARD);
 	}
 
 
