@@ -64,27 +64,6 @@
 		  </span>
 		</div>
       </form>
-		<!--
-      <ul class="nav navbar-nav navbar-right">
-      	<% if(isEmpty(session.session_user)){ %>
-			<li><a href="${BASE_PATH }oauth2/login.html?loin_type=baidu" class="navbar-brand" ><img alt="Brand" src="${BASE_PATH }static/oauth2/baidu_login.png"></a></li>
-			<li><a href="${BASE_PATH }oauth2/login.html?loin_type=qq" class="navbar-brand" ><img alt="Brand" src="${BASE_PATH }static/oauth2/qq_login.png"></a></li>
-			<li><a href="${BASE_PATH }front/login.html">登录</a></li>
-			<li class="${'regist'==folders_selected!''?'active':''}"><a href="${BASE_PATH }front/regist.html" >注册</a></li>
-		<% } else { %>
-			<li class="${'personhome'==folders_selected!''?'active':''}"><a href="${BASE_PATH }front/person.html" id="myhome" >我的空间</a></li>
-			<li class="${'message'==folders_selected!''?'active':''}"><a href="${BASE_PATH }front/message.html" id="mymessage" >我的消息</a></li>
-			<li class="dropdown ${'person'==folders_selected!''?'active':''}">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">个人信息<span class="caret"></span></a>
-	          <ul class="dropdown-menu" role="menu">
-	            <li class="${'person'==folders_selected!''?'active':''}"><a href="${BASE_PATH }front/person/profile.html">个人设置</a></li>
-	            <li class="divider"></li>
-	            <li><a href="${BASE_PATH }front/logout">退出</a></li>
-	          </ul>
-	        </li>
-		<% } %>
-      </ul>
-      -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

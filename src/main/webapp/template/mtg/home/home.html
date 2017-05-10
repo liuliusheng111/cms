@@ -20,378 +20,629 @@ var educations = temp.articlePage(1, 10,284);
 // 公告
 var noticeList = temp.notice(1);
 %>
-
-<% 
-	var headContent = {
-%>
+<%var headContent = {%>
 	<% include("/template/mtg/includes/header.html"){} %>
 	<meta property="qc:admins" content="3746002437626416706375" />
 	<meta name="baidu-site-verification" content="HoZ9m8VIaf" />
-<script type="text/javascript">
-<!--
-	$(function(){
-		$('.carousel').carousel({
-			interval: 2000
-		});
-		
-		// js加载避免优先级问题
-		$('.more').css('float','right').css('font-size','12px').css('color','green');
-		
-		// 最新新闻
-		$("#new_news_tab").on('mousemove',function(){
-			$(this).parent('li').addClass('active');
-			$("#new_dynamic_tab").parent('li').removeClass('active');
-			$('#new_news').show();
-			$('#new_dynamic').hide();
-			return false;
-		});
-		
-		// 最新动态
-		$("#new_dynamic_tab").on('mousemove',function(){
-			$(this).parent('li').addClass('active');
-			$("#new_news_tab").parent('li').removeClass('active');
-			$('#new_dynamic').show();
-			$('#new_news').hide();
-			return false;
-		});
-		
-	});
-//-->
-</script>
-
-<%
-};
-%>
-
+<%};%>
 <%
 var bodyContent = {
 %>
-<%  include("/template/mtg/includes/header_menu.html"){} %>	
 
-
-<div class="container">
-	
-	<div class="row">
-	  
-	  <!-- 图片 -->
-	  <div class="col-md-8">
-		
-		<div class="panel panel-default">
-		  <div class="panel-body" style="padding: 0px;">
-	
-				 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-					  <!-- Indicators -->
-					  <ol class="carousel-indicators">
-						  <% for(item in topPics){ %>
-						  	<li data-target="#carousel-example-generic" data-slide-to="${itemLP.index-1}" ${itemLP.index==1?"class=\"active\"":""}></li>
-						  <%}%>
-					  </ol>
-
-					  <!-- Wrapper for slides -->
-					  <div class="carousel-inner" role="listbox">
-						<% for(item in topPics){ %>
-							<div style="height: 450px;" class="item ${itemLP.index==1?'active':''}">
-							  <% if(strutil.isNotEmpty(item.url)) { %>
-							  <a href="${item.url}" target="_blank">
-							  <% } %>
-							   	<img src="${flyfox.getImage(item)}" alt="${item.title}">
-							  <% if(strutil.isNotEmpty(item.url)) { %>
-							  </a>
-							  <% } %>
-							  <div class="carousel-caption">
-								<h4></h4>
-								<p>${item.title}</p>
-							  </div>
-							</div>
-						<% } %>
-						
-						
-					  </div>
-	
-					  <!-- Controls -->
-					  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">上一页</span>
-					  </a>
-					  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">下一页</span>
-					  </a>
-					</div>
-		  </div>
-		</div>
-	  
-	  </div>
-	  
-	  <!--  新闻 -->
-	  <div class="col-md-4">
-		  	<ul class="nav nav-tabs">
-			  <li role="presentation" class="active" style="cursor: pointer;">
-			  	<a style="cursor:pointer;" href="#" onclick="return false;" id="new_news_tab">最新新闻</a>
-			  </li>
-			  <li role="presentation" >
-			  	<a style="cursor:pointer;" href="#"  onclick="return false;" id="new_dynamic_tab">最新动态</a>
-			  </li>
-			</ul>
-			<div id="new_news"  class="panel panel-default" 
-				style="border-top-width: 0px;border-radius:0px;border-bottom-right-radius:4px; border-bottom-left-radius: 4px;">
-			   <!-- List group -->
-			  <ul class="list-group">
-			  	<% for(item in news.list){ %>
-					<li class="list-group-item">
-						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-						<% if(itemLP.index <= 3) { %>
-						<span class="label label-success">${itemLP.index}</span>
-						<% } else { %>
-						<span class="label label-info">${itemLP.index}</span>
-						<% } %>
-						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
-						<% if (strutil.length(item.title) > 16) { %>
-							${strutil.subStringTo(item.title, 0, 16)}...
-						<% 	} else { %>
-							${item.title}
-						<%  } %>
-						</a>
-					</li>
-				<% } %>
-			  </ul>
-			</div>
-			<div id="new_dynamic" class="panel panel-default" 
-				style="border-top-width: 0px;border-radius:0px;border-bottom-right-radius:4px;border-bottom-left-radius: 4px;display: none;">
-			   <!-- List group -->
-			  <ul class="list-group">
-			  	<% for(item in newArticles.list){ %>
-					<li class="list-group-item">
-						<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-						<% if(itemLP.index <= 3) { %>
-						<span class="label label-success">${itemLP.index}</span>
-						<% } else { %>
-						<span class="label label-info">${itemLP.index}</span>
-						<% } %>
-						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
-						<% if (strutil.length(item.title) > 16) { %>
-							${strutil.subStringTo(item.title, 0, 16)}...
-						<% 	} else { %>
-							${item.title}
-						<%  } %>
-						</a>
-					</li>
-				<% } %>
-			  </ul>
-			</div>
-	
-	  </div>
+<!--顶部-->
+<div class="top">
+	<div class="area center">
+		<div class="welcome">中国硬笔书法协会官方网站</div>
+		<div class="time" id="currentDate"></div>
 	</div>
-
-	<div class="row">
-	 	
-	  <div class="col-md-8">
-	  	<%  
-			if(noticeList != null && noticeList.~size > 0) {
-		%>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-			<h3 class="panel-title">首页公告</h3>
-		  </div>
-		  <div class="panel-body">
-			<%
-				for(item in noticeList){ 
-			%>
-			<p><span class="label label-info">${itemLP.index}</span> <a href="${item.url}" target="_blank">${item.content}</a></p>
-			<% 
-				}
-			%>
-		 </div>
-		</div>
-		<%
-			} 
-		%>
-
-	  <!-- 新闻中心 -->
-	  <div class="panel panel-default">
-		  <div class="panel-heading">
-			  <h3 class="panel-title">
-				  <a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">新闻中心</a>
-				  <a class="more" href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">更多</a>
-			  </h3>
-		  </div>
-		  <div class="panel-body">
-
-			  <div class="row">
-				  <% for(item in news.list){ %>
-				  <div class="col-sm-6 col-md-4">
-					  <div class="thumbnail">
-						  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
-							  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-						  </a>
-						  <div class="caption">
-							  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
-						  </div>
-					  </div>
-				  </div>
-				  <% if(itemLP.index%3==0){ %>
-			  </div>
-			  <div class="row">
-				  <% } %>
-				  <% } %>
-			  </div>
-
-		  </div>
-	  </div>
-
-	  	<!-- 名家书法作品 -->
-	  	<div class="panel panel-default">
-		  <div class="panel-heading">
-		  	<h3 class="panel-title">
-				<a href="${BASE_PATH }${flyfox.getMenu(277)}.html" target="_blank">名家书法作品</a>
-				<a class="more" href="${BASE_PATH }${flyfox.getMenu(277)}.html" target="_blank">更多</a>
-			</h3>
-		  </div>
-		  <div class="panel-body">
-		  
-		  <div class="row">
-		  <% for(item in travels.list){ %>
-			<div class="col-sm-6 col-md-4">
-		        <div class="thumbnail">
-		          <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
-		          <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
-		          </a>
-		          <div class="caption">
-		            <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
-		          </div>
-		        </div>
-		      </div>
-		      <% if(itemLP.index%3==0){ %>
-		  </div>
-		  <div class="row">
-		      <% } %>
-		  <% } %>
-		  </div>
-	
-		  </div>
-		</div>
-
-
-		<!-- 地图 -->
-		  <!--
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-			<h3 class="panel-title">地图</h3>
-		  </div>
-		  <div class="panel-body" style="padding: 0px;">
-		  	<div  class="thumbnail" >
-		    	    <img width="100%" height="450" src="http://api.map.baidu.com/staticimage?center=116.186394,39.907031&zoom=13&width=930&height=450&markers=116.109356,39.925625"/>
-		    </div>
-		  </div>
-		</div>
-		-->
-	  </div>
-	
-	  <div class="col-md-4">	
-		
-		<!-- 活动集锦 -->
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		  	<h3 class="panel-title">
-				<a href="${BASE_PATH }${flyfox.getMenu(4)}.html" target="_blank">活动集锦</a>
-				<a class="more" href="${BASE_PATH }${flyfox.getMenu(4)}.html" target="_blank">更多</a>
-			</h3>
-		  </div>
-		  <div class="panel-body" style="padding-bottom:0px;">
-			<div class="row">
-			  <% for(item in active.list){ %>
-			  	<% if(itemLP.index <= 2){ %>
-			  	 <div class="col-md-6">
-					<div class="thumbnail">
-					  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
-					  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
-					  </a>
-					  <div class="caption">
-						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
-					  </div>
-					</div>
-				  </div>
-			      <% } %>
-			  <% } %>
-			</div>
-		  </div>
-			
-		 <ul class="list-group">
-		  	<% for(item in active.list){ %>
-		  		<% if(itemLP.index > 2){ %>
-				<li class="list-group-item">
-					<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-					<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
-					<% if (strutil.length(item.title) > 18) { %>
-						${strutil.subStringTo(item.title, 0, 18)}...
-					<% 	} else { %>
-						${item.title}
-					<%  } %>
-					</a>
-				</li>
-				<% } %>
-			<% } %>
-		  </ul>
-			
-		</div>
-		
-		<!-- 教育培训 -->
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-			<h3 class="panel-title">
-				<a href="${BASE_PATH }${flyfox.getMenu(284)}.html" target="_blank">教育培训</a>
-				<a class="more" href="${BASE_PATH }${flyfox.getMenu(284)}.html" target="_blank">更多</a>
-			</h3>
-		  </div>
-		  
-		  <div class="panel-body" style="padding-bottom:0px;">
-			<div class="row">
-			  <% for(item in educations.list){ %>
-			  	<% if(itemLP.index <= 2){ %>
-			  	 <div class="col-md-6">
-					<div class="thumbnail">
-					  <a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
-					  <img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 120px; width: 100%; display: block;">
-					  </a>
-					  <div class="caption">
-						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
-					  </div>
-					</div>
-				  </div>
-			      <% } %>
-			  <% } %>
-			</div>
-		  </div>
-		  
-		  <ul class="list-group">
-		  	<% for(item in educations.list){ %>
-		  		<% if(itemLP.index > 2){ %>
-				<li class="list-group-item">
-					<span class="badge">${flyfox.substr(item.publish_time,5,10) }</span>
-					<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
-					<% if (strutil.length(item.title) > 18) { %>
-						${strutil.subStringTo(item.title, 0, 18)}...
-					<% 	} else { %>
-						${item.title}
-					<%  } %>
-					</a>
-				</li>
-				<% } %>
-			<% } %>
-		  </ul>
-		  
-		</div>
-		
-		<!-- 友情链接 -->
-	  	<%  include("/template/mtg/includes/friendly.html"){} %>
-		</div>
-	</div>
-
 </div>
-<%  include("/template/mtg/includes/footer.html"){} %>
-	
-<a id="scrollTop" href="javacript:void(0);" title="返回顶部" style="display: inline;"></a>
-	
+<!--logo和频道导航-->
+<div class="header">
+	<div class="logo"><a href="http://www.zgybsfxh.com/"><img src="http://www.zgybsfxh.com/statics/images/logo.png" /></a></div>
+	<div class="search">
+		<form action="http://www.zgybsfxh.com/index.php" method="get" target="_blank">
+			<input type="hidden" name="m" value="search"/>
+			<input type="hidden" name="c" value="index"/>
+			<input type="hidden" name="a" value="init"/>
+			<input type="hidden" name="typeid" value="1" id="typeid"/>
+			<input type="hidden" name="siteid" value="1" id="siteid"/>
+			<input type="text" class="text" name="q" id="q" value="请输入关键词" onfocus="if(this.value=='请输入关键词'){this.value='';} " onblur="if(this.value==''){this.value='请输入关键词';}" autocomplete="off">
+			<input type="submit" value="搜 索" class="button" />
+		</form>
+	</div>
+	<div class="nav_bar">
+		<ul>
+			<!-- <li><a href="http://www.zgybsfxh.com" class="on">网站首页</a></li> -->
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=10">协会概况</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=11">大书法天地</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=14">展赛动态</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=12">学术批评</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=13">教育培训</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=17">专业委员会</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=25">大 事 记</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=20">视频中心</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=15">会员中心</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=9">国际交流</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=16">地方动态</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=18">权威刊物</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=23">人物专栏</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=19">书法考级</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=22">工作委员会</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=24">名城名乡名校</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=29">下载中心</a></li>
+			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=28">事务中心</a></li>
+		</ul>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="wrap">
+	<!--专题位-->
+	<div class="ad1"><script language="javascript" src="http://www.zgybsfxh.com/caches/poster_js/14.js"></script></div>
+	<!--书坛要闻-->
+	<div class="a1 mod">
+		<div class="title1">
+			<div class="catname">
+				<a href="" target="_blank">书坛要闻</a>
+			</div>
+			<div class="space"></div>
+			<div class="gundong" id="marq">
+				<ul>
+					<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=37&id=37" target="_blank">关于册页手卷展（第三届）延迟截稿日期的通知</a></li>
+				</ul>
+			</div>
+			<div class="more"><a href="" target="_blank">更多</a></div>
+		</div>
+		<div class="c1">
+			<div id="KinSlideshow" class="KinSlideshow">
+				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=91" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0902/20160902061821609.jpg" width="607" height="378" alt="【通知】第二届全国书法教育百强十佳评选暨高峰论坛" /></a>
+				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=75" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0831/thumb_607_378_20160831025203184.jpg" width="607" height="378" alt="张晓明、张华庆、施子清出席“水木清华”大书法艺术作品" /></a>
+				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=30&id=55" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_607_378_20160830015236622.jpg" width="607" height="378" alt="中国书法名家张华庆等热烈祝贺吴孟超院士披肝沥胆六十年" /></a>
+				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=35" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0814/thumb_607_378_20160814125315662.png" width="607" height="378" alt="中国硬笔书法协会全国书法教育高峰论坛暨颁奖典礼" /></a>
+			</div>
+		</div>
+		<div class="c2">
+			<ul class="list">
+				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=30&id=160" target="_blank">【通知】中国书画等级考试硬笔书法培训师（天津）培训会</a></li>
+				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=25&id=153" target="_blank">2016年度中国硬笔书坛十大事件</a></li>
+				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=30&id=133" target="_blank">全国第三届硬笔书法家作品展览征稿启事</a></li>
+				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=75" target="_blank">张晓明、张华庆、施子清出席“水木清华”大书法艺术作品</a></li>
+				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=36&id=65" target="_blank">【通知】中硬协关于在全国硬笔书法界 开展学习贯彻习近平</a></li>
+				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=30&id=55" target="_blank">中国书法名家张华庆等热烈祝贺吴孟超院士披肝沥胆六十年</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--协会动态-->
+	<div class="a2 mod">
+		<div class="c1">
+			<div class="title1">
+				<div class="catname"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=37" target="_blank">站内快讯</a></div>
+				<div class="space"></div>
+				<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=37" target="_blank">更多</a></div>
+			</div>
+			<div class="list">
+				<ul>
+					<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=159" target="_blank">【通知】中国书画等级考试硬笔书法培训师（天津）培训会</a></li>
+					<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=16&id=135" target="_blank">【通知】中硬协艺委会创作中心 首批创作员资格认证培训会</a></li>
+					<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=37&id=156" target="_blank">中国硬笔书法协会办学指导中心官方通知</a></li>
+					<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=37&id=82" target="_blank">关于《老子》刻碑活动的征稿通知</a></li>
+					<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=37&id=37" target="_blank">关于册页手卷展（第三届）延迟截稿日期的通知</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="c2">
+			<div class="title1">
+				<div class="catname"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=36" target="_blank">协会动态</a></div>
+				<div class="space"></div>
+				<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=36" target="_blank">更多</a></div>
+			</div>
+			<ul class="list2">
+				<li class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=36&id=65" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0831/20160831030446750.png" alt="1" width="183" height="117"></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=36&id=65" target="_blank">【通知】中硬协关于在全国硬笔书法界 开展学习贯彻习近平</a></div>
+					<div class="description">中国硬笔书法协会关于在全国硬笔书法界开展学习贯彻习近平总书记在文艺座谈会上重要讲话精神的通知 为贯彻落...</div>
+					<div class="detail"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=36&id=65" target="_blank">点击详情&nbsp;&nbsp;&gt;&gt;</a></div>
+				</li>
+				<li class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=129" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1013/20161013015549806.jpg" alt="1" width="183" height="117"></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=129" target="_blank">全国大书法艺术册页手卷展（第三届）评审在瑞安举行</a></div>
+					<div class="description">全国大书法艺术册页手卷展（第三届）评审在瑞安举行10月9日，全国大书法艺术册页手卷展（第三届）展览作品评审...</div>
+					<div class="detail"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=129" target="_blank">点击详情&nbsp;&nbsp;&gt;&gt;</a></div>
+				</li>
+				<li class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=91" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0902/20160902061821609.jpg" alt="1" width="183" height="117"></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=91" target="_blank">【通知】第二届全国书法教育百强十佳评选暨高峰论坛</a></div>
+					<div class="description">中国硬笔书法协会关于举办第二届全国书法教育百强十佳评选暨高峰论坛的通知中国硬笔书法协会关于举办2015－201...</div>
+					<div class="detail"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=91" target="_blank">点击详情&nbsp;&nbsp;&gt;&gt;</a></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--大书法展厅-->
+	<div class="a3 mod">
+		<div class="title1">
+			<div class="catname"><a href="">大书法展厅</a></div>
+			<div class="space"></div>
+			<div class="tabs">
+				<span class="hover" onmouseover="hover(this,'a3')"><a style="background:0; color:white; padding:0px; margin:0px;" href="#">传承有道</a></span>
+				<span onmouseover="hover(this,'a3')"><a style="background:0; color:white; padding:0px; margin:0px;" href="#">水木清华</a></span>
+			</div>
+		</div>
+		<div class="content" id="a3">
+			<div class="sheet" style="display:block;">
+				<div class="item">
+					<div class="picture2"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=31&id=64" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_242_167_20160830042357929.jpg" alt="1" width='242' height='167'/></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=31&id=64" target="_blank">传承有道大书法艺术展——邀请作品</a></div>
+				</div>
+				<div class="item">
+					<div class="picture2"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=31&id=48" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0905/thumb_242_167_20160905060636385.jpg" alt="1" width='242' height='167'/></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=31&id=48" target="_blank">传承有道大书法艺术展——张华庆作品</a></div>
+				</div>
+				<div class="item">
+					<div class="picture2"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=31&id=49" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_242_167_20160829050434640.jpg" alt="1" width='242' height='167'/></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=31&id=49" target="_blank">传承有道大书法艺术展——李冰作品</a></div>
+				</div>
+				<div class="item">
+					<div class="picture2"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=31&id=50" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_242_167_20160829052813569.jpg" alt="1" width='242' height='167'/></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=31&id=50" target="_blank">传承有道大书法艺术展——熊洁英作品</a></div>
+				</div>
+			</div>
+			<div class="sheet">
+				<div class="item">
+					<div class="picture2"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=42&id=63" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_242_167_20160830040358579.jpg" alt="1" width='242' height='167'/></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=42&id=63" target="_blank">“水木清华”大书法艺术作品香港展开幕式（四）</a></div>
+				</div>
+				<div class="item">
+					<div class="picture2"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=42&id=62" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_242_167_20160830040115763.jpg" alt="1" width='242' height='167'/></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=42&id=62" target="_blank">“水木清华”大书法艺术作品香港展开幕式（三）</a></div>
+				</div>
+				<div class="item">
+					<div class="picture2"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=42&id=61" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_242_167_20160830035629671.jpg" alt="1" width='242' height='167'/></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=42&id=61" target="_blank">“水木清华”大书法艺术作品香港展开幕式（二）</a></div>
+				</div>
+				<div class="item">
+					<div class="picture2"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=42&id=60" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_242_167_20160830034840268.jpg" alt="1" width='242' height='167'/></a></div>
+					<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=42&id=60" target="_blank">“水木清华”大书法艺术作品香港展开幕式（一）</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!--测试 liuls-->
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">新闻中心</a>
+				<a class="more" href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">更多</a>
+			</h3>
+		</div>
+		<div class="panel-body">
+
+			<div class="row">
+				<% for(item in news.list){ %>
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">
+							<img alt="${item.title}" src="${flyfox.getImage(item)}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+						</a>
+						<div class="caption">
+							<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
+						</div>
+					</div>
+				</div>
+				<% if(itemLP.index%3==0){ %>
+			</div>
+			<div class="row">
+				<% } %>
+				<% } %>
+			</div>
+
+		</div>
+	</div>
+
+
+	<!--人物专栏-->
+	<div class="a4 mod">
+		<div class="title1">
+			<div class="catname"><a href="#" target="_blank">人物专栏</a></div>
+			<div class="space"></div>
+			<div class="more">
+				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=23" target="_blank">更多</a>
+			</div>
+		</div>
+		<a href="#" target="_blank"><div class="sub_c_title" style="width:84px; font-size:14px; float:left;">五届主席</div><div class="sub_c_title" style="width:190px; margin-left:0px; float:left; font-size:14px;">五届副主席</div></a>
+		<div class="content">
+			<div class="item" style="margin-right:16px;">
+				<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=43&id=38" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829112502993.jpg" alt="张华庆" width='71' height='98'/></a></div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=43&id=38" target="_blank">张华庆</a></div>
+			</div>
+			<div id="demoL">
+				<div id="indemoL">
+					<div id="demoL1">
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=43" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0812/thumb_71_98_20160812041250431.jpg" alt="丁谦" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=43" target="_blank">丁谦</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=45" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829024234383.jpg" alt="王讯谟" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=45" target="_blank">王讯谟</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=40" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829021904629.jpg" alt="陈联合" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=40" target="_blank">陈联合</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=41" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829022208646.jpg" alt="李冰" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=41" target="_blank">李冰</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=42" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829022814571.jpg" alt="李景杭" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=42" target="_blank">李景杭</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=47" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829025350645.jpg" alt="张宝彤" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=47" target="_blank">张宝彤</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=44" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829024002442.jpg" alt="高继承" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=44" target="_blank">高继承</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=46" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829024501621.jpg" alt="司马武当" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=44&id=46" target="_blank">司马武当</a></div>
+						</div>
+						<div class="item" style="width:30px;margin:10px 0px;">
+							<div class="thumb"></div>
+							<div class="title"></div>
+						</div>
+					</div>
+					<div id="demoL2"></div>
+				</div>
+			</div>
+		</div>
+		<div class="seperate"></div>
+		<a href="#" target="_blank"><div class="sub_c_title" style="font-size:14px;">推荐人物</div></a>
+		<div class="content">
+			<div id="demoLD">
+				<div id="indemoLD">
+					<div id="demoLD1">
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=150" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128042439716.jpg" alt="沈鸿根" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=150" target="_blank">沈鸿根</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=149" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128042311669.jpg" alt="崔国强" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=149" target="_blank">崔国强</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=148" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128042035156.jpg" alt="赵国柱" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=148" target="_blank">赵国柱</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=147" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128041834215.jpg" alt="刘胄人" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=147" target="_blank">刘胄人</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=146" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128041716303.jpg" alt="谢非墨" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=146" target="_blank">谢非墨</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=145" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128041348244.jpg" alt="李书忠" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=145" target="_blank">李书忠</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=144" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128041209675.jpg" alt="陈亮" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=144" target="_blank">陈亮</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=143" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128040919655.jpg" alt="李岩选" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=143" target="_blank">李岩选</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=139" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128034857417.jpg" alt="郑文义" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=139" target="_blank">郑文义</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=151" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128042657852.jpg" alt="刁品纯" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=151" target="_blank">刁品纯</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=140" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128035936583.jpg" alt="王惠松" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=140" target="_blank">王惠松</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=142" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128040626456.jpg" alt="薛祥林" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=142" target="_blank">薛祥林</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=141" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/1128/thumb_71_98_20161128040450692.jpg" alt="孙玉田" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=141" target="_blank">孙玉田</a></div>
+						</div>
+						<div class="item">
+							<div class="thumb"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=51" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0829/thumb_71_98_20160829060130354.jpg" alt="熊洁英" width='71' height='98'/></a></div>
+							<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=45&id=51" target="_blank">熊洁英</a></div>
+						</div>
+					</div>
+					<div id="demoLD2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--广告-->
+	<div class="ad2"><script language="javascript" src="http://www.zgybsfxh.com/caches/poster_js/12.js"></script></div>
+	<!--品牌活动-->
+	<div class="a5 mod">
+		<div class="cat-area">
+			<div class="mod">
+				<div class="title1">
+					<div class="catname"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=9" target="_blank">国际交流</a></div>
+					<div class="space"></div>
+					<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=9" target="_blank">更多</a></div>
+				</div>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=9&id=59" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_302_165_20160830032545129.jpg" alt="第二十四届国际书法联盟作品展开幕典礼在台隆重开幕" width='302' height='165'/></a></div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=9&id=59" title="第二十四届国际书法联盟作品展开幕典礼在台隆重开幕" target="_blank">第二十四届国际书法联盟作品展开幕典礼在台隆重开幕</a></div>
+				<div class="list">
+					<ul>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=9&id=59" title="第二十四届国际书法联盟作品展开幕典礼在台隆重开幕" target="_blank">第二十四届国际书法联盟作品展开幕典礼在台隆重开幕</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="mod">
+				<div class="title1">
+					<div class="catname"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=16" target="_blank">地方动态</a></div>
+					<div class="space"></div>
+					<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=16" target="_blank">更多</a></div>
+				</div>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=16&id=54" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_302_165_20160830115539830.jpg" alt="乐清成功创建“中国硬笔书法名城”" width='302' height='165'/></a></div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=16&id=54" title="乐清成功创建“中国硬笔书法名城”" target="_blank">乐清成功创建“中国硬笔书法名城”</a></div>
+				<div class="list">
+					<ul>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=16&id=134" title="中国硬笔书法协会艺委会创作中心 首批创作员申报聘任方案" target="_blank">中国硬笔书法协会艺委会创作中心 首批创作员申报聘任方案</a></li>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=16&id=135" title="【通知】中硬协艺委会创作中心 首批创作员资格认证培训会" target="_blank">【通知】中硬协艺委会创作中心 首批创作员资格认证培训会</a></li>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=16&id=70" title="辽宁省硬笔书法家协会 召开学习贯彻习近平总书记文艺座谈" target="_blank">辽宁省硬笔书法家协会 召开学习贯彻习近平总书记文艺座谈</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="mod">
+				<div class="title1">
+					<div class="catname"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=14" target="_blank">展赛动态</a></div>
+					<div class="space"></div>
+					<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=14" target="_blank">更多</a></div>
+				</div>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=157" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2017/0218/thumb_302_165_20170218022941100.jpg" alt="第六届全国少年儿童书法硬笔书法大赛暨规范汉字书写大赛" width='302' height='165'/></a></div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=157" title="第六届全国少年儿童书法硬笔书法大赛暨规范汉字书写大赛" target="_blank">第六届全国少年儿童书法硬笔书法大赛暨规范汉字书写大赛</a></div>
+				<div class="list">
+					<ul>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=155" title="关于举办首届“书法印象”杯全国书法、硬笔书法 大赛的通" target="_blank">关于举办首届“书法印象”杯全国书法、硬笔书法 大赛的通</a></li>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=132" title="全国大书法艺术册页手卷展（第三届）入选名单" target="_blank">全国大书法艺术册页手卷展（第三届）入选名单</a></li>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=129" title="全国大书法艺术册页手卷展（第三届）评审在瑞安举行" target="_blank">全国大书法艺术册页手卷展（第三届）评审在瑞安举行</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="mod">
+				<div class="title1">
+					<div class="catname"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=12" target="_blank">学术批评</a></div>
+					<div class="space"></div>
+					<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=12" target="_blank">更多</a></div>
+				</div>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=12&id=52" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_302_165_20160830020439240.jpg" alt="对 韩 天 衡 篆 刻 的 印 象——张华庆" width='302' height='165'/></a></div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=12&id=52" title="对 韩 天 衡 篆 刻 的 印 象——张华庆" target="_blank">对 韩 天 衡 篆 刻 的 印 象——张华庆</a></div>
+				<div class="list">
+					<ul>
+					</ul>
+				</div>
+			</div>
+			<div class="mod">
+				<div class="title1">
+					<div class="catname"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=13" target="_blank">教育培训</a></div>
+					<div class="space"></div>
+					<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=13" target="_blank">更多</a></div>
+				</div>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=159" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2017/0424/thumb_302_165_20170424073213954.jpg" alt="【通知】中国书画等级考试硬笔书法培训师（天津）培训会" width='302' height='165'/></a></div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=159" title="【通知】中国书画等级考试硬笔书法培训师（天津）培训会" target="_blank">【通知】中国书画等级考试硬笔书法培训师（天津）培训会</a></div>
+				<div class="list">
+					<ul>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=57" title="【通知】硬笔书法培训师第十三期北京培训会通知" target="_blank">【通知】硬笔书法培训师第十三期北京培训会通知</a></li>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=91" title="【通知】第二届全国书法教育百强十佳评选暨高峰论坛" target="_blank">【通知】第二届全国书法教育百强十佳评选暨高峰论坛</a></li>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=56" title="中国硬笔书法培训师资格认证会瑞安第三期班举行" target="_blank">中国硬笔书法培训师资格认证会瑞安第三期班举行</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="mod">
+				<div class="title1">
+					<div class="catname"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=19" target="_blank">书法考级</a></div>
+					<div class="space"></div>
+					<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=19" target="_blank">更多</a></div>
+				</div>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=19&id=58" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_302_165_20160830031555900.jpg" alt="中国书画等级考试2016年11月报考简章及考务工作日程安排" width='302' height='165'/></a></div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=19&id=58" title="中国书画等级考试2016年11月报考简章及考务工作日程安排" target="_blank">中国书画等级考试2016年11月报考简章及考务工作日程安排</a></div>
+				<div class="list">
+					<ul>
+						<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=19&id=53" title="教育部关于印发《中小学书法教育指导纲要》的通知" target="_blank">教育部关于印发《中小学书法教育指导纲要》的通知</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--视频中心-->
+	<div class="a6 mod">
+		<div class="title1">
+			<div class="catname"><a href="#" target="_blank">视频中心</a></div>
+			<div class="space"></div>
+			<div class="more"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=20" target="_blank">更多</a></div>
+		</div>
+		<ul class="video">
+			<li>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=35" target="_blank">
+					<img src="http://www.zgybsfxh.com/uploadfile/2016/0814/thumb_230_130_20160814125315662.png" width="230" height="130" />
+					<img src="http://www.zgybsfxh.com/statics/images/www/cover_video.png" class="cover" /></a>
+				</div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=35" target="_blank">中国硬笔书法协会全国书法教育高峰论坛暨颁奖典礼</a></div>
+			</li>
+			<li>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=34" target="_blank">
+					<img src="http://www.zgybsfxh.com/uploadfile/2016/0814/thumb_230_130_20160814125205960.png" width="230" height="130" />
+					<img src="http://www.zgybsfxh.com/statics/images/www/cover_video.png" class="cover" /></a>
+				</div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=34" target="_blank">中国硬笔书法协第二届书法教育会教授、副教授评审工作</a></div>
+			</li>
+			<li>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=33" target="_blank">
+					<img src="http://www.zgybsfxh.com/uploadfile/2016/0812/thumb_230_130_20160812082412898.png" width="230" height="130" />
+					<img src="http://www.zgybsfxh.com/statics/images/www/cover_video.png" class="cover" /></a>
+				</div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=33" target="_blank">大书法的倡导者——中国硬笔书法协会主席张华庆先生part2</a></div>
+			</li>
+			<li>
+				<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=32" target="_blank">
+					<img src="http://www.zgybsfxh.com/uploadfile/2016/0812/thumb_230_130_20160812081308203.png" width="230" height="130" />
+					<img src="http://www.zgybsfxh.com/statics/images/www/cover_video.png" class="cover" /></a>
+				</div>
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=32" target="_blank">大书法的倡导者——中国硬笔书法协会主席张华庆先生part1</a></div>
+			</li>
+		</ul>
+	</div>
+	<!--书法传媒-->
+	<div class="a7 mod">
+		<div class="c1" id="a7">
+			<div class="title1">
+				<div class="catname"><a href="#" target="_blank">权威刊物</a></div>
+				<div class="space"></div>
+				<div class="more"><a href="#" target="_blank">更多</a></div>
+				<div class="tabs">
+					<span class="hover" onmouseover="hover(this,'a7')">《中国大书法》</span>
+					<span onmouseover="hover(this,'a7')">中国硬笔书法报</span>
+				</div>
+			</div>
+			<div class="sheet" style="display:block;">
+				<div class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=38&id=81" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0831/thumb_140_190_20160831063505277.jpg" alt="1" width='140' height='190'/></a>
+						<div class="title_bg"></div>
+						<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=38&id=81" target="_blank">《中国大书法》乙未秋</a></div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=38&id=80" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0831/thumb_140_190_20160831063351798.jpg" alt="1" width='140' height='190'/></a>
+						<div class="title_bg"></div>
+						<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=38&id=80" target="_blank">《中国大书法》乙未春</a></div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=38&id=79" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0831/thumb_140_190_20160831063156750.jpg" alt="1" width='140' height='190'/></a>
+						<div class="title_bg"></div>
+						<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=38&id=79" target="_blank">《中国大书法》甲午夏</a></div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=38&id=78" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0831/thumb_140_190_20160831062847915.jpg" alt="1" width='140' height='190'/></a>
+						<div class="title_bg"></div>
+						<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=38&id=78" target="_blank">《中国大书法》甲午春</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="sheet">
+				<div class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=39&id=89" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0901/thumb_140_190_20160901024032143.jpg" alt="1" width='140' height='190'/></a>
+						<div class="title_bg"></div>
+						<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=39&id=89" target="_blank">中国硬笔书法报223期</a></div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=39&id=88" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0901/thumb_140_190_20160901023919582.jpg" alt="1" width='140' height='190'/></a>
+						<div class="title_bg"></div>
+						<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=39&id=88" target="_blank">中国硬笔书法报222期</a></div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=39&id=87" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0901/thumb_140_190_20160901023753813.jpg" alt="1" width='140' height='190'/></a>
+						<div class="title_bg"></div>
+						<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=39&id=87" target="_blank">中国硬笔书法报221期</a></div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="picture"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=39&id=86" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0901/thumb_140_190_20160901022400812.jpg" alt="1" width='140' height='190'/></a>
+						<div class="title_bg"></div>
+						<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=39&id=86" target="_blank">中国硬笔书法报219期</a></div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="ccp">
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=46" target="_blank">《中国大书法》订阅</a></div>
+				<div class="description">中国大书法理事会（按姓氏笔画排序）【专家委员会】：丁 谦 王巨才 王东发 王讯谟 刘敬钦 西中文 晋 ...<div class="detail"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=46" target="_blank">点击详情&nbsp;>></a></div></div>
+			</div>
+			<div class="ccp" style="margin-left:20px;">
+				<div class="title"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=47" target="_blank">《中国硬笔书法报》订阅</a></div>
+				<div class="description"> 《中国硬笔书法报》是中国硬笔书法协会的官方刊物之一，对开四版，套红印刷，月刊发行。为振兴发展中国硬笔...<div class="detail"><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=47" target="_blank">点击详情&nbsp;>></a></div></div>
+			</div>
+		</div>
+		<div class="c2">
+			<div class="title1">
+				<div class="catname">互动平台</div>
+				<div class="space"></div>
+			</div>
+			<div class="code">
+				<p><img src="http://www.zgybsfxh.com/statics/images/www/weixin1.jpg" alt="中国硬笔书法协会官方微信平台"><span>中国硬笔书法协会<br />官方微信平台</span></p>
+				<p><img src="http://www.zgybsfxh.com/statics/images/www/weixin2.jpg" alt="中国大书法官方微信平台"><span>中国大书法<br />官方微信平台</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+<!--footer-->
+<div class="footer">
+	<div class="part1">
+		<div class="title center">友情链接</div>
+		<div class="links center">
+			<div class="group">
+				<div class="group_title">媒体门户网站</div>
+				<div class="link">
+					<a href="http://www.china.com.cn/" target="_blank">中国网</a>
+					<a href="http://www.people.com.cn/" target="_blank">人民网</a>
+					<a href="http://www.cflac.org.cn/" target="_blank">中国文艺网</a>
+					<a href="http://www.xinhuanet.com/" target="_blank">新华网</a>
+				</div>
+			</div>
+			<div class="group">
+				<div class="group_title">国家文艺协会</div>
+				<div class="link">
+					<a href="http://www.cfa1949.com/" target="_blank">中国电影家协会</a>
+					<a href="http://www.chinatheatre.org/" target="_blank">中国戏剧家协会网</a>
+					<a href="http://www.caanet.org.cn/" target="_blank">中国美术家协会网</a>
+					<a href="http://www.chinawriter.com.cn/" target="_blank">中国作家协会</a>
+					<a href="http://www.cflac.org.cn/" target="_blank">中国文学艺术联合会</a>
+					<a href="http://www.chnmusic.org/" target="_blank">中国音乐家协会</a>
+					<a href="http://www.cpanet.org.cn/" target="_blank">中国摄影家协会</a>
+					<a href="http://www.cdanet.org/" target="_blank">中国舞蹈家协会</a>
+					<a href="http://www.ccagov.com.cn/" target="_blank">中国书法家协会</a>
+				</div>
+			</div>
+			<div class="group">
+				<div class="group_title">地方硬笔书协</div>
+				<div class="link">
+					<a href="http://www.zgybsf.net/" target="_blank">中国硬笔书法网</a>
+					<a href="http://www.liangguidong.com/" target="_blank">中国硬笔书法江湖</a>
+					<a href="http://www.ybsftd.com/zt/Index.html" target="_blank">硬笔书法天地</a>
+					<a href="http://www.sfsfj.com/" target="_blank">湖南省硬笔书法家协会</a>
+					<a href="http://www.scybsfw.com/" target="_blank">四川省硬笔书法协会</a>
+				</div>
+			</div>
+			<div class="group">
+				<div class="group_title">行业书法协会</div>
+				<div class="link">
+					<a href="http://sf.caaccm.org.cn/" target="_blank">中国煤矿书法家协会</a>
+					<a href="http://www.cnpc.com.cn/sfjxh/" target="_blank">中国石油书法家协会</a>
+				</div>
+			</div>
+		</div>
+		<div class="info_links center">
+			<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=2" target="_blank">关于我们</a> |                        <a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=3" target="_blank">联系方式</a> |                        <a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=4" target="_blank">权责声明</a> |                        <a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=51" target="_blank">意见反馈</a> |                        <a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=50" target="_blank">友好合作</a>                                </div>
+	</div>
+	<div class="part2">
+		<p>中国硬笔书法协会官网</p>
+		<p>地址：北京市朝阳区高碑店文化新大街2号&nbsp; 邮编：100124 | 中文网络注册实名：中国硬笔书法协会网 | 联系人：李淼焱&nbsp; 电话：010-63051095；18611691865</p>
+		<p>网址：http://www.zgybsfxh.com | E-mail：limiaoyan@163.com | 京ICP备16035215号 | 中国硬笔书法协会 版权所有 | 监管部门：中华人民共和国文化部、中华人民共和国民政部</p>    </div>
+</div>
 <%}; %>
 
 <% layout("/pages/template/_layout.html",{head:headContent,body:bodyContent}){ %>

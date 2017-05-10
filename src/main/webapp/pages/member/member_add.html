@@ -28,13 +28,13 @@
         <div class="fillbox">
             <form name="form" id="form1" action="member/add" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="model.id" value="${model.id}" />
-                <div class="field name">
+                <div class="field name" style="padding-bottom: 0px;">
                     <p class="fn-clear"><label>会员类型</label>
                         <label style="position: relative;width: 1.5rem;float: left;height: 0.4rem;">
-                            少儿<input checked="checked"  type="radio" style="width: 1rem;height:0.5rem;-webkit-appearance:radio;vertical-align:text-top; margin-top:0;"  valid="vtext" name="model.type" value="child"/>
+                            少儿<input checked="checked"  type="radio" style="width: 0.8rem;height:0.4rem;-webkit-appearance:radio;vertical-align:text-top; margin-top:0;"  valid="vtext" name="model.type" value="child"/>
                         </label>
-                        <label style="position: relative;width: 1.5rem;">
-                            成人<input type="radio" style="width: 1rem;height:0.5rem;-webkit-appearance:radio"   valid="vtext" name="model.type" value="grownup"/>
+                        <label style="position: relative;width: 1.5rem;height: 0.4rem;">
+                            成人<input type="radio" style="width: 0.8rem;height:0.4rem;-webkit-appearance:radio;vertical-align:text-top; margin-top:0;"   valid="vtext" name="model.type" value="grownup"/>
                         </label>
                     </p>
 
@@ -44,6 +44,7 @@
                         <input type="text" placeholder="(必填)" valid="vtext" name="model.name"/>
                     </p>
                 </div>
+
 
                 <div class="photo fn-clear">
                     <div class="photo_l"><label>会员作品</label></div>
