@@ -28,86 +28,106 @@ var noticeList = temp.notice(1);
 <%
 var bodyContent = {
 %>
+<%  include("/template/mtg/includes/header_menu.html"){} %>
 
-<!--顶部-->
-<div class="top">
-	<div class="area center">
-		<div class="welcome">天津硬笔书法协会官方网站</div>
-		<div class="time" id="currentDate"></div>
-	</div>
-</div>
-<!--logo和频道导航-->
-<div class="header">
-	<div class="logo"><a href="http://www.zgybsfxh.com/"><img src="http://www.zgybsfxh.com/statics/images/logo.png" /></a></div>
-	<div class="search">
-		<form action="http://www.zgybsfxh.com/index.php" method="get" target="_blank">
-			<input type="hidden" name="m" value="search"/>
-			<input type="hidden" name="c" value="index"/>
-			<input type="hidden" name="a" value="init"/>
-			<input type="hidden" name="typeid" value="1" id="typeid"/>
-			<input type="hidden" name="siteid" value="1" id="siteid"/>
-			<input type="text" class="text" name="q" id="q" value="请输入关键词" onfocus="if(this.value=='请输入关键词'){this.value='';} " onblur="if(this.value==''){this.value='请输入关键词';}" autocomplete="off">
-			<input type="submit" value="搜 索" class="button" />
-		</form>
-	</div>
-	<div class="nav_bar">
-		<ul>
-			<!-- <li><a href="http://www.zgybsfxh.com" class="on">网站首页</a></li> -->
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=10">协会概况</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=11">大书法天地</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=14">展赛动态</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=12">学术批评</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=13">教育培训</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=17">专业委员会</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=25">大 事 记</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=20">视频中心</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=15">会员中心</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=9">国际交流</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=16">地方动态</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=18">权威刊物</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=23">人物专栏</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=19">书法考级</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=22">工作委员会</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=24">名城名乡名校</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=29">下载中心</a></li>
-			<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=lists&catid=28">事务中心</a></li>
-		</ul>
-	</div>
-	<div class="clear"></div>
-</div>
 <div class="wrap">
 	<!--专题位-->
 	<div class="ad1"><script language="javascript" src="http://www.zgybsfxh.com/caches/poster_js/14.js"></script></div>
-	<!--书坛要闻-->
+	<!--新闻中心-->
 	<div class="a1 mod">
 		<div class="title1">
 			<div class="catname">
-				<a href="" target="_blank">书坛要闻</a>
+				<a href="" target="_blank">新闻中心</a>
 			</div>
 			<div class="space"></div>
 			<div class="gundong" id="marq">
+				<!--
 				<ul>
 					<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=37&id=37" target="_blank">关于册页手卷展（第三届）延迟截稿日期的通知</a></li>
 				</ul>
+				-->
 			</div>
 			<div class="more"><a href="" target="_blank">更多</a></div>
 		</div>
 		<div class="c1">
+			<!--
 			<div id="KinSlideshow" class="KinSlideshow">
 				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=13&id=91" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0902/20160902061821609.jpg" width="607" height="378" alt="【通知】第二届全国书法教育百强十佳评选暨高峰论坛" /></a>
 				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=75" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0831/thumb_607_378_20160831025203184.jpg" width="607" height="378" alt="张晓明、张华庆、施子清出席“水木清华”大书法艺术作品" /></a>
 				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=30&id=55" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0830/thumb_607_378_20160830015236622.jpg" width="607" height="378" alt="中国书法名家张华庆等热烈祝贺吴孟超院士披肝沥胆六十年" /></a>
 				<a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=20&id=35" target="_blank"><img src="http://www.zgybsfxh.com/uploadfile/2016/0814/thumb_607_378_20160814125315662.png" width="607" height="378" alt="中国硬笔书法协会全国书法教育高峰论坛暨颁奖典礼" /></a>
 			</div>
+			-->
+			<!-- 图片 -->
+			<div class="">
+
+				<div class="panel panel-default">
+					<div class="panel-body" style="padding: 0px;">
+
+						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<% for(item in topPics){ %>
+								<li data-target="#carousel-example-generic" data-slide-to="${itemLP.index-1}" ${itemLP.index==1?"class=\"active\"":""}></li>
+								<%}%>
+							</ol>
+
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner" role="listbox">
+								<% for(item in topPics){ %>
+								<div style="height: 450px;" class="item ${itemLP.index==1?'active':''}">
+									<% if(strutil.isNotEmpty(item.url)) { %>
+									<a href="${item.url}" target="_blank">
+										<% } %>
+										<img src="${flyfox.getImage(item)}" alt="${item.title}">
+										<% if(strutil.isNotEmpty(item.url)) { %>
+									</a>
+									<% } %>
+									<div class="carousel-caption">
+										<h4></h4>
+										<p>${item.title}</p>
+									</div>
+								</div>
+								<% } %>
+
+
+							</div>
+							<!-- Controls -->
+							<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+								<span class="sr-only">上一页</span>
+							</a>
+							<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								<span class="sr-only">下一页</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
 		</div>
 		<div class="c2">
 			<ul class="list">
+				<% for(item in news.list){ %>
+				<li>
+					<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
+						<% if (strutil.length(item.title) > 16) { %>
+						${strutil.subStringTo(item.title, 0, 16)}...
+						<% 	} else { %>
+						${item.title}
+						<%  } %>
+					</a>
+				</li>
+				<% } %>
+				<!--
 				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=30&id=160" target="_blank">【通知】中国书画等级考试硬笔书法培训师（天津）培训会</a></li>
 				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=25&id=153" target="_blank">2016年度中国硬笔书坛十大事件</a></li>
 				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=30&id=133" target="_blank">全国第三届硬笔书法家作品展览征稿启事</a></li>
 				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=14&id=75" target="_blank">张晓明、张华庆、施子清出席“水木清华”大书法艺术作品</a></li>
 				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=36&id=65" target="_blank">【通知】中硬协关于在全国硬笔书法界 开展学习贯彻习近平</a></li>
 				<li><a href="http://www.zgybsfxh.com/index.php?m=content&c=index&a=show&catid=30&id=55" target="_blank">中国书法名家张华庆等热烈祝贺吴孟超院士披肝沥胆六十年</a></li>
+				-->
 			</ul>
 		</div>
 	</div>
