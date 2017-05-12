@@ -28,20 +28,40 @@
         <div class="fillbox">
             <form name="form" id="form1" action="member/add" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="model.id" value="${model.id}" />
-                <div class="field name" style="padding-bottom: 0px;">
-                    <p class="fn-clear"><label>会员类型</label>
-                        <label style="position: relative;width: 1.5rem;float: left;height: 0.4rem;">
-                            少儿<input checked="checked"  type="radio" style="width: 0.8rem;height:0.4rem;-webkit-appearance:radio;vertical-align:text-top; margin-top:0;"  valid="vtext" name="model.type" value="child"/>
-                        </label>
-                        <label style="position: relative;width: 1.5rem;height: 0.4rem;">
-                            成人<input type="radio" style="width: 0.8rem;height:0.4rem;-webkit-appearance:radio;vertical-align:text-top; margin-top:0;"   valid="vtext" name="model.type" value="grownup"/>
-                        </label>
-                    </p>
-
+                <div class="type fn-clear">
+                    <div class="radio_l" style="">会员类型</div>
+                    <div class="radio_r">
+                        <span>
+                           <label for="child">少儿</label>
+                           <input type="radio" checked id="child" name="model.type" value="child"/>
+                        </span>
+                        <span>
+                           <label for="adult">成人</label>
+                           <input type="radio" id="adult" name="model.type" value="grownup"/>
+                        </span>
+                    </div>
                 </div>
                 <div class="field name">
                     <p class="fn-clear"><label>会员姓名</label>
                         <input type="text" placeholder="(必填)" valid="vtext" name="model.name"/>
+                    </p>
+                </div>
+                <div class="type fn-clear">
+                    <div class="radio_l" style="">会员性别</div>
+                    <div class="radio_r">
+                        <span>
+                           <label for="male">男</label>
+                           <input type="radio" checked id="male" name="model.gender" value="1"/>
+                        </span>
+                        <span>
+                           <label for="semale">女</label>
+                           <input type="radio" id="semale" name="model.gender" value="0"/>
+                        </span>
+                    </div>
+                </div>
+                <div class="field name">
+                    <p class="fn-clear"><label>会员年龄</label>
+                        <input type="text" placeholder="(必填)" valid="vtext" name="model.age"/>
                     </p>
                 </div>
 
