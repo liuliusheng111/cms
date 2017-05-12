@@ -5,6 +5,7 @@ import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
 import com.jflyfox.util.StrUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 目录管理
@@ -110,7 +111,7 @@ public class FolderController extends BaseProjectController {
 		String now = getNow();
 		model.put("update_id", userid);
 		model.put("update_time", now);
-
+		model.setPath(model.getPath()==null? StringUtils.EMPTY:model.getPath().trim()); //防止页面添加时带空格,造成不能查看
 		if (pid != null && pid > 0) { // 更新
 			model.update();
 		} else { // 新增
