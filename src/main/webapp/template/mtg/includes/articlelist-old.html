@@ -8,6 +8,28 @@
 	 	<% for(item in articlelist.list){ %>
 	 	<li class="list-group-item">
 		<div class="row">
+		  <div class="col-md-2">
+		  	<div class="thumbnail">
+		  	  <% 
+		  	  // 图片设置
+		  	  var picName ="";
+		  	  if(strutil.isNotEmpty(item.image_url)) { 
+		  	  	picName = flyfox.getImage(item);
+				if(!strutil.startWith(picName , 'http')) {
+					picName = BASE_PATH + picName;
+				}
+		  	  } else if(flyfox.getNow()==item.publish_time){ // 当天图片
+		  	   	picName = BASE_PATH + "static/front/images/today.jpg";
+		  	  } else if(strutil.isNotEmpty(defalutimg!'')) { // 默认图片，可设置
+		  	  	picName = BASE_PATH + defalutimg;
+		  	  } else { // 什么都没有~！~
+		  	  	picName = BASE_PATH + "static/front/images/documents.png";	
+			  }
+			  %>
+			  <img src="${picName}" alt="${item.title}" height="85" data-holder-rendered="true"
+			  	 style="height: 85px; width: 100%; display: block;" >
+			</div>
+		  </div>
 		  <div class="col-md-10">
 				<h4>
 				<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">

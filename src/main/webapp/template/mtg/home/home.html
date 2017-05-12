@@ -31,8 +31,6 @@ var bodyContent = {
 <%  include("/template/mtg/includes/header_menu.html"){} %>
 
 <div class="wrap">
-	<!--专题位-->
-	<div class="ad1"><script language="javascript" src="http://www.zgybsfxh.com/caches/poster_js/14.js"></script></div>
 	<!--新闻中心-->
 	<div class="a1 mod">
 		<div class="title1">
@@ -47,7 +45,7 @@ var bodyContent = {
 				</ul>
 				-->
 			</div>
-			<div class="more"><a href="" target="_blank">更多</a></div>
+			<div class="more"><a href="${BASE_PATH }${flyfox.getMenu(3)}.html" target="_blank">更多</a></div>
 		</div>
 		<div class="c1">
 			<!--
@@ -112,8 +110,8 @@ var bodyContent = {
 				<% for(item in news.list){ %>
 				<li>
 					<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
-						<% if (strutil.length(item.title) > 16) { %>
-						${strutil.subStringTo(item.title, 0, 16)}...
+						<% if (strutil.length(item.title) > 30) { %>
+						${strutil.subStringTo(item.title, 0, 30)}...
 						<% 	} else { %>
 						${item.title}
 						<%  } %>
