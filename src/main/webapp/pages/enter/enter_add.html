@@ -33,6 +33,26 @@
                         <input type="text" placeholder="(必填)" valid="vtext" name="model.name"/>
                     </p>
                 </div>
+                <div class="type fn-clear">
+                    <div class="radio_l" style="">参赛者性别</div>
+                    <div class="radio_r">
+                        <span>
+                           <label for="male">男</label>
+                           <input type="radio" checked id="male" name="model.gender" value="1"/>
+                        </span>
+                        <span>
+                           <label for="semale">女</label>
+                           <input type="radio" id="semale" name="model.gender" value="0"/>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field declaration">
+                    <p class="fn-clear"><label>参赛者年龄</label>
+                        <input type="text" placeholder="(选填)" name="model.age"/>
+                    </p>
+                </div>
+
                 <div class="photo fn-clear">
                     <div class="photo_l"><label>参赛者作品</label></div>
                     <div class="photo_r">
@@ -49,12 +69,14 @@
                             <img id="del2" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
 
                         </span>
+                        <!--
                         <span class="addimg">
                             <input type="file"  id="file3" accept="image/*" onchange="uploadFile(3)" name="file3"/>
                             <input type="hidden" id="imageId3" name="imageId3">
                             <img  id="img3" class="addedimg"  style="display:none">
                             <img class="del" id="del3" src="static/enter/images/del.png" style="display: none" onclick="removeImg(3)">
                         </span>
+                        -->
 
                     </div>
                 </div>
@@ -68,11 +90,7 @@
                         <input type="text" placeholder="(必填)" name="model.address"/>
                     </p>
                 </div>
-                <div class="field declaration">
-                    <p class="fn-clear"><label>参赛者年龄</label>
-                        <input type="text" placeholder="(选填)" name="model.age"/>
-                    </p>
-                </div>
+
                 <div class="tojoin">
                     <input type="button" onclick="oper_save()" value="确认报名"/>
                 </div>
