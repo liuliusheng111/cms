@@ -21,7 +21,65 @@
 		</div>
 	</footer>
 </div>
+<div class="footer">
+	<div class="part1">
+		<div class="links center">
+			<div class="group">
+				<div class="group_title">媒体门户网站</div>
+				<div class="link">
+					<a href="http://www.china.com.cn/" target="_blank">中国网</a>
+					<a href="http://www.people.com.cn/" target="_blank">人民网</a>
+					<a href="http://www.cflac.org.cn/" target="_blank">中国文艺网</a>
+					<a href="http://www.xinhuanet.com/" target="_blank">新华网</a>
+				</div>
+			</div>
+			<div class="group">
+				<div class="group_title">国家文艺协会</div>
+				<div class="link">
+					<a href="http://www.cfa1949.com/" target="_blank">中国电影家协会</a>
+					<a href="http://www.chinatheatre.org/" target="_blank">中国戏剧家协会网</a>
+					<a href="http://www.caanet.org.cn/" target="_blank">中国美术家协会网</a>
+					<a href="http://www.chinawriter.com.cn/" target="_blank">中国作家协会</a>
+					<a href="http://www.cflac.org.cn/" target="_blank">中国文学艺术联合会</a>
+					<a href="http://www.chnmusic.org/" target="_blank">中国音乐家协会</a>
+					<a href="http://www.cpanet.org.cn/" target="_blank">中国摄影家协会</a>
+					<a href="http://www.cdanet.org/" target="_blank">中国舞蹈家协会</a>
+					<a href="http://www.ccagov.com.cn/" target="_blank">中国书法家协会</a>
+				</div>
+			</div>
+			<div class="group">
+				<div class="group_title">地方硬笔书协</div>
+				<div class="link">
+					<a href="http://www.zgybsf.net/" target="_blank">中国硬笔书法网</a>
+					<a href="http://www.liangguidong.com/" target="_blank">中国硬笔书法江湖</a>
+					<a href="http://www.ybsftd.com/zt/Index.html" target="_blank">硬笔书法天地</a>
+					<a href="http://www.sfsfj.com/" target="_blank">湖南省硬笔书法家协会</a>
+					<a href="http://www.scybsfw.com/" target="_blank">四川省硬笔书法协会</a>
+				</div>
+			</div>
+			<div class="group">
+				<div class="group_title">行业书法协会</div>
+				<div class="link">
+					<a href="http://sf.caaccm.org.cn/" target="_blank">中国煤矿书法家协会</a>
+					<a href="http://www.cnpc.com.cn/sfjxh/" target="_blank">中国石油书法家协会</a>
+				</div>
+			</div>
+		</div>
+		<div class="info_links center">
+			<%for(item in aboutList){%>
+			<a href="${item.url}" target="_blank">${item.name}</a>
+			<% if(itemLP.index!=aboutList.~size) { %>
+				<span>&nbsp;|&nbsp;</span>
+			<%}
+			}%>
+		</div >
+		<div class="info_links center">
+		<p>天津硬笔书法协会官网</p>
+		<p>地址：天津市南开区古文化街文化小城B-211&nbsp; 邮编：100124 |  联系电话：022-27353283；15712287300</p>
+		<p>网址：http://www.tjybsf.cn | 津ICP备16001281号-1 | 天津硬笔书法协会 版权所有 | 监管部门：中华人民共和国文化部、中华人民共和国民政部</p>
+		</div>
 
+</div>
 <!-- 底部广告 -->
 <!-- 
 <script type="text/javascript">
