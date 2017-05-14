@@ -76,13 +76,13 @@ var bodyContent = {
 							</ol>
 
 							<!-- Wrapper for slides -->
-							<div class="carousel-inner" role="listbox">
+							<div class="carousel-inner" role="listbox" style="text-align: center">
 								<% for(item in topPics){ %>
-								<div style="height: 450px;" class="item ${itemLP.index==1?'active':''}">
+								<div  class="item ${itemLP.index==1?'active':''}" style="height: 350px;text-align:center" >
 									<% if(strutil.isNotEmpty(item.url)) { %>
 									<a href="${item.url}" target="_blank">
 										<% } %>
-										<img src="${flyfox.getImage(item)}" alt="${item.title}">
+										<img src="${flyfox.getImage(item)}" alt="${item.title}" style="height: 350px">
 										<% if(strutil.isNotEmpty(item.url)) { %>
 									</a>
 									<% } %>
