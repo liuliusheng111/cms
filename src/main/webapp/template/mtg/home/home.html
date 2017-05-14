@@ -82,7 +82,9 @@ var bodyContent = {
 									<% if(strutil.isNotEmpty(item.url)) { %>
 									<a href="${item.url}" target="_blank">
 										<% } %>
-										<img src="${flyfox.getImage(item)}" alt="${item.title}" style="height: 350px">
+										<div style="text-align: center">
+											<img src="${flyfox.getImage(item)}" alt="${item.title}" style="height: 350px;width: auto">
+										</div>
 										<% if(strutil.isNotEmpty(item.url)) { %>
 									</a>
 									<% } %>
