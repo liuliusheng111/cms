@@ -15,7 +15,7 @@ import com.jflyfox.modules.admin.site.TbSite;
  */
 public class CommonInterceptor implements Interceptor {
 
-	private static final String TITLE = "天津硬笔书法协会";
+	private static final String TITLE = "天津市硬笔书法协会";
 
 	public void intercept(Invocation ai) {
 
