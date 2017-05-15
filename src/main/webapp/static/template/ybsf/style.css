@@ -1,7 +1,7 @@
 /*通用*/
 *{outline:0}
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;word-wrap:break-word}
-body{margin:0;font-size:14px;line-height:26px;color:#1b1b1b;font-family:微软雅黑,Simhei;}
+body{margin:0;font-size:14px;line-height:26px;color:#1b1b1b;font-family:微软雅黑,Simhei;background: url("bg.jpg")}
 ul,ol,li{list-style:none;}
 div{overflow:hidden;}a{text-decoration:none;}a:link{color:#1b1b1b;}a:visited{color:#1b1b1b;}a:hover{color:#1b1b1b;}a:active{color:#1b1b1b;}
 .center{margin:0 auto;}.area{width:980px;}.clear{clear:both;}.area img{width:100%;height:100%;border:none;}
