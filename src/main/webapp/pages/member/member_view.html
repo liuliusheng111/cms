@@ -14,17 +14,17 @@ var bodyContent = {
 		</tr>
         <%if(!isEmpty(model.image1Id)) {%>
             <tr>
-                <td><img src="upload/member/${model.image1Id}"  style="height: 600px"/></td>
+                <td><img src="upload/member/${model.image1Id}"  onerror="javascript:this.src='${url}/member/${model.image1Id}'"  style="height: 600px"/></td>
             </tr>
         <%}%>
         <%if(!isEmpty(model.image2Id)) {%>
             <tr>
-                <td><img src="upload/member/${model.image2Id}"  style="height: 600px"/></td>
+                <td><img src="upload/member/${model.image2Id}" onerror="javascript:this.src='${url}/member/${model.image1Id}'" style="height: 600px"/></td>
 			</tr>
         <%}%>
         <%if(!isEmpty(model.image3Id)) {%>
             <tr>
-				<td><img src="upload/member/${model.image3Id}"  style="height: 300px"/></td>
+				<td><img src="upload/member/${model.image3Id}"  onerror="javascript:this.src='${url}/member/${model.image1Id}'" style="height: 300px"/></td>
 			</tr>
         <%}%>
 
@@ -33,12 +33,12 @@ var bodyContent = {
 			<td>会员头像: </td>
 		</tr>
 		<tr>
-			<td><img src="upload/member/${file.photo}"  style="height: 600px"/></td>
+			<td><img src="upload/member/${file.photo}" onerror="javascript:this.src='${url}/member/${file.photo}'"  style="height: 600px"/></td>
 		</tr>
 		<%}%>
 		<%if(!isEmpty(file.resume)) {%>
 		<tr>
-			<td><a href="upload/member/${file.resume}">简历下载</a></td>
+			<td><a href="${url}/member/${file.resume}" onerror="javascript:this.href='${url}/member/${file.resume}'">简历下载</a></td>
 		</tr>
 		<%}%>
 	</table>

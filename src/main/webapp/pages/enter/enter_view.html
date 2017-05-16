@@ -11,7 +11,7 @@ var bodyContent = {
 		<%  // 列表头部 %>
 		<%if(!isEmpty(model.image1Id)) {%>
 			<tr>
-				<td><img src="upload/enter/${model.image1Id}"  style="height: 600px"/></td>
+				<td><img src="upload/enter/${model.image1Id}" onerror="javascript:this.src='${url}/enter/${model.image1Id}'"  style="height: 600px"/></td>
 			</tr>
 		<%}%>
 		<%if(!isEmpty(model.image2Id)) {%>
