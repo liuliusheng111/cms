@@ -3,6 +3,7 @@ package com.jflyfox.modules.enter;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.common.TbStatus;
+import com.jflyfox.common.utils.Constants;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
@@ -87,6 +88,7 @@ public class EnterController extends BaseProjectController {
 		TbUserImg model = TbUserImg.dao.findFirst(" select * from tb_user_img " //
 				+ " where type=1 and user_id= "+getParaToInt());
 		setAttr("model", model);
+		setAttr("url", Constants.IMAGE_PRIFIX_URL);
 		render(path + "view.html");
 	}
 

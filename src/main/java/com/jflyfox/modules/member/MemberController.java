@@ -3,6 +3,7 @@ package com.jflyfox.modules.member;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.plugin.activerecord.Page;
 import com.jflyfox.common.TbStatus;
+import com.jflyfox.common.utils.Constants;
 import com.jflyfox.component.base.BaseProjectController;
 import com.jflyfox.jfinal.component.annotation.ControllerBind;
 import com.jflyfox.jfinal.component.db.SQLUtils;
@@ -104,6 +105,7 @@ public class MemberController extends BaseProjectController {
 				+ " where  user_id= "+getParaToInt()+" and status=0 ");
 		setAttr("model", model);
 		setAttr("file", file);
+		setAttr("url", Constants.IMAGE_PRIFIX_URL);
 		render(path + "view.html");
 	}
 
