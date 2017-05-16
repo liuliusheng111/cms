@@ -43,7 +43,7 @@ div{overflow:hidden;}a{text-decoration:none;}a:link{color:#1b1b1b;}a:visited{col
 .header .search .button{float:left;background:url("submit.png")/*tpa=http://www.zgybsfxh.com/statics/images/www/submit.png*/;border:none;color:#fff; height:27px;width:30px;font-size:0;cursor:pointer;}
 .header .nav_bar{width:980px;font-size:14px;color:#cccccc;border-top:4px solid #a0a0a0;overflow:hidden;}
 .header .nav_bar ul{width:990px;}
-.header .nav_bar ul li{float:left;width:100px;text-align:center;margin-top:10px;margin-right:10px;}
+.header .nav_bar ul li{float:left;width:89px;text-align:center;margin-top:10px;margin-right:10px;}
 .header .nav_bar ul li a{display:block;height:30px;line-height:30px;border:1px solid #ededed;background:#fafafa}
 .header .nav_bar ul li a:hover,.header .nav_bar ul li a.on{border:1px solid #a40000;background:#a40000;color:#fff;}
 /*首页*/
