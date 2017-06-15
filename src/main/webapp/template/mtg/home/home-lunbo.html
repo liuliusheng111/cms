@@ -12,7 +12,7 @@ var news = temp.articlePage(1, 7, 3);
 var production = temp.articlePage(1, 4, 277);
 
 //协会简介
-var association  = temp.articlePage(1, 4, 2);
+var association  = temp.articlePage(1, 6, 2);
 
 // 活动集锦
 var active = temp.articlePage(1, 4, 4);
@@ -31,10 +31,6 @@ var download = temp.articlePage(1, 4,285);
 
 // 联系我们
 var contact = temp.articlePage(1, 4,289);
-
-// 协会党建
-var dangjian = temp.articlePage(1, 6,292);
-
 %>
 <%var headContent = {%>
 	<% include("/template/mtg/includes/header.html"){} %>
@@ -136,13 +132,13 @@ var bodyContent = {
 	<div class="a2 mod">
 		<div class="c1">
 			<div class="title1">
-				<div class="catname"><a href="${BASE_PATH }${flyfox.getMenu(292)}.html" target="_blank">协会党建</a></div>
+				<div class="catname"><a href="${BASE_PATH }${flyfox.getMenu(2)}.html" target="_blank">关于协会</a></div>
 				<div class="space"></div>
-				<div class="more"><a href="${BASE_PATH }${flyfox.getMenu(292)}.html" target="_blank">更多</a></div>
+				<div class="more"><a href="${BASE_PATH }${flyfox.getMenu(2)}.html" target="_blank">更多</a></div>
 			</div>
 			<div class="list">
 				<ul>
-					<% for(item in dangjian.list){ %>
+					<% for(item in association.list){ %>
 					<li>
 						<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank" title="${item.title}">
 							<% if (strutil.length(item.title) > 30) { %>
@@ -215,6 +211,67 @@ var bodyContent = {
 			</div>
 		</div>
 	</div>
+
+	<!---->
+
+	<div>
+		<div class="c1">
+
+			<!-- 图片 -->
+			<div class="">
+
+				<div class="panel panel-default">
+					<div class="panel-body" style="padding: 0px;">
+
+						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<% for(item in topPics){ %>
+								<li data-target="#carousel-example-generic" data-slide-to="${itemLP.index-1}" ${itemLP.index==1?"class=\"active\"":""}></li>
+								<%}%>
+							</ol>
+
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner" role="listbox" style="text-align: center">
+								<% for(item in topPics){ %>
+								<div  class="item ${itemLP.index==1?'active':''}" style="height: 350px;text-align:center" >
+									<% if(strutil.isNotEmpty(item.url)) { %>
+									<a href="${item.url}" target="_blank">
+										<% } %>
+										<div style="text-align: center">
+											<img src="${flyfox.getImage(item)}" alt="${item.title}" style="height: 350px;width: auto">
+											<img src="${flyfox.getImage(item)}" alt="${item.title}" style="height: 350px;width: auto">
+											<img src="${flyfox.getImage(item)}" alt="${item.title}" style="height: 350px;width: auto">
+											<img src="${flyfox.getImage(item)}" alt="${item.title}" style="height: 350px;width: auto">
+										</div>
+										<% if(strutil.isNotEmpty(item.url)) { %>
+									</a>
+									<% } %>
+									<div class="carousel-caption">
+										<h4></h4>
+										<p>${item.title}</p>
+									</div>
+								</div>
+								<% } %>
+
+
+							</div>
+							<!-- Controls -->
+							<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+								<span class="sr-only">上一页</span>
+							</a>
+							<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								<span class="sr-only">下一页</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="ad2"><script language="javascript" src="http://www.zgybsfxh.com/caches/poster_js/12.js"></script></div>
 	<!--其他-->
 	<div class="a5 mod">
@@ -244,23 +301,6 @@ var bodyContent = {
 				</div>
 
 				<% for(item in download.list){ %>
-					<% if(itemLP.index <= 4){ %>
-						<div class="item">
-							<div class="title">
-								<a href="${BASE_PATH }front/article/${item.id}.html" target="_blank">${item.title}</a>
-							</div>
-						</div>
-					<% } %>
-				<% } %>
-			</div>
-			<div class="mod">
-				<div class="title1">
-					<div class="catname"><a href="${BASE_PATH }${flyfox.getMenu(2)}.html" target="_blank">协会简介</a></div>
-					<div class="space"></div>
-					<div class="more"><a href="${BASE_PATH }${flyfox.getMenu(2)}.html" target="_blank">更多</a></div>
-				</div>
-
-				<% for(item in association.list){ %>
 					<% if(itemLP.index <= 4){ %>
 						<div class="item">
 							<div class="title">
