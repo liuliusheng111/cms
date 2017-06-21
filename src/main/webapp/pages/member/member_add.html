@@ -71,19 +71,20 @@
 
 
                 <div class="photo fn-clear">
-                    <div class="photo_l"><label>会员作品</label></div>
+                    <div class="photo_l"><label>会员作品</label>
+                        <br><label style="color: red">(小于3M/张)</label></div>
                     <div class="photo_r">
                         <span class="addimg">
                             <input type="file" id="file1"  accept="image/*" onchange="uploadFile(1)" name="file1"/>
                             <input type="hidden" id="imageId1" name="imageId1">
                             <img  id="img1" class="addedimg"  style="display: none">
-                            <img  id="del1" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(1)">
+                            <img  id="del1" class="del" src="${BASE_PATH}/static/enter/images/del.png" style="display: none" onclick="removeImg(1)">
                         </span>
                         <span class="addimg">
                             <input type="file"  id="file2" accept="image/*" onchange="uploadFile(2)" name="file2"/>
                             <input type="hidden" id="imageId2" name="imageId2">
                             <img id="img2" class="addedimg"  style="display:none">
-                            <img id="del2" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
+                            <img id="del2" class="del" src="${BASE_PATH}/static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
 
                         </span>
                         <!--
@@ -98,13 +99,14 @@
                     </div>
                 </div>
                 <div class="photo fn-clear">
-                    <div class="photo_l"><label>会员头像</label></div>
+                    <div class="photo_l"><label>会员头像</label>
+                        <br><label style="color: red">(小于3M)</label></div>
                     <div class="photo_r">
                         <span class="addimg">
                             <input type="file" id="file4"  accept="image/*" onchange="uploadFile(4)" name="file4"/>
                             <input type="hidden" id="photo" name="photo">
                             <img  id="pho" class="addedimg"  style="display: none">
-                            <img  id="del4" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(4)">
+                            <img  id="del4" class="del" src="${BASE_PATH}/static/enter/images/del.png" style="display: none" onclick="removeImg(4)">
                         </span>
                     </div>
                 </div>
@@ -115,7 +117,7 @@
                             <input type="file" id="file5"  onchange="uploadFile(5)" name="file5"/>
                             <input type="hidden" id="resume" name="resume">
                             <img id="res"  class="addedimg" style="display: none" >
-                            <img  id="del5" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(5)">
+                            <img  id="del5" class="del" src="${BASE_PATH}/static/enter/images/del.png" style="display: none" onclick="removeImg(5)">
                         </span>
                     </div>
                 </div>
@@ -335,7 +337,7 @@
     }
 
 </script>
-<script type="text/javascript" src="static/common/valid.js"></script>
-<script type="text/javascript" src="static/component/ueditor/third-party/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="${BASE_PATH}/static/common/valid.js"></script>
+<script type="text/javascript" src="${BASE_PATH}/static/component/ueditor/third-party/jquery-1.10.2.min.js"></script>
 </body>
 </html>
