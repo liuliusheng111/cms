@@ -63,19 +63,20 @@
                 </div>
 
                 <div class="photo fn-clear">
-                    <div class="photo_l"><label>参赛者作品</label></div>
+                    <div class="photo_l"><label>参赛者作品
+                        <br><label style="color: red">(小于3M/张)</label></label></div>
                     <div class="photo_r">
                         <span class="addimg">
                             <input type="file" id="file1"  accept="image/*" onchange="uploadFile(1)" name="file1"/>
                             <input type="hidden" id="imageId1" name="imageId1">
                             <img  id="img1" class="addedimg"  style="display: none">
-                            <img  id="del1" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(1)">
+                            <img  id="del1" class="del" src="${BASE_PATH}/static/enter/images/del.png" style="display: none" onclick="removeImg(1)">
                         </span>
                         <span class="addimg">
                             <input type="file"  id="file2" accept="image/*" onchange="uploadFile(2)" name="file2"/>
                             <input type="hidden" id="imageId2" name="imageId2">
                             <img id="img2" class="addedimg"  style="display:none">
-                            <img id="del2" class="del" src="static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
+                            <img id="del2" class="del" src="${BASE_PATH}/static/enter/images/del.png" style="display: none" onclick="removeImg(2)">
 
                         </span>
                         <!--
@@ -251,7 +252,7 @@
     }
 
 </script>
-<script type="text/javascript" src="static/common/valid.js"></script>
-<script type="text/javascript" src="static/component/ueditor/third-party/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="${BASE_PATH}/static/common/valid.js"></script>
+<script type="text/javascript" src="${BASE_PATH}/static/component/ueditor/third-party/jquery-1.10.2.min.js"></script>
 </body>
 </html>
