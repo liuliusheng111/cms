@@ -34,6 +34,9 @@ public class UploadImgService {
 				return result;
 			}
 			FileItem fileItem = items.get(0);
+			if (fileItem.getSize() > 3 * 1024 * 1024){ //限制3M
+				return result;
+			}
 			final byte[] bytes = fileItem.get();
 			String pictureName =fileItem.getName();
 			if (pictureName==null){
