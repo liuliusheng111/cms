@@ -49,6 +49,15 @@ public class MemberController extends BaseProjectController {
 
 		//保存投稿信息
 		TbMember model = getModel(TbMember.class);
+
+		//重名检查
+		TbMember db = TbMember.dao.findFirstByWhere(" where name= ? and status=0",model.getName());
+		if (db!=null){
+			json.put("msg","重名,请重新填写");
+			renderJson(json.toJSONString());
+			return;
+		}
+
 		model.setCreateTime(getNow());
 		model.setStatus(TbStatus.OK.ordinal());
 		model.save();
