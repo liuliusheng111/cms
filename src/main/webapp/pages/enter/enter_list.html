@@ -39,7 +39,11 @@
 					form1.action = url;
 					form1.submit();
 				});
+			},
+			export:function () {
+				window.open('export/exportEnter');
 			}
+
 		};
 		//显示Menu索引
 		showMenu('page_comment');
@@ -72,6 +76,10 @@ var bodyContent = {
 			</button>
 			<button type="button" class="btn btn-default" onclick="resetForm();">
 			 		<span class="glyphicon glyphicon-refresh"></span> 重 置
+			</button>
+
+			<button type="button" class="btn btn-default" onclick="oper.export();">
+			 		<span class="glyphicon glyphicon-refresh"></span> 导出
 			</button>
 			<!-- 
 			<button type="button" class="btn btn-default" onclick="oper.add();">
